@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-   enum TeamColors
+
+   public interface IParticipant
    {
-      Red,
-      Green,
-      Blue,
-      Yellow,
-      Grey
-   }
-   internal interface IParticipant
-   {
-      public String Name { get; set; }
+      public enum TeamColors
+      {
+         Red,
+         Green,
+         Blue,
+         Yellow,
+         Grey
+      }
+
+      public string Name { get; set; }
       public int Points { get; set; }
       public IEquipment equipment { get; set; }
       public TeamColors TeamColor { get; set; }

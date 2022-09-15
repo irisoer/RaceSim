@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-   internal class Track
+   public class Track
    {
       public string Name;
       public LinkedList<Section> Sections;

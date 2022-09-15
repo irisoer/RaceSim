@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Level1", "Level 1\Level1.csproj", "{BF5E6DB5-9829-4C95-9ECC-818B6D88689A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaceSimSolution", "Level 1\RaceSimSolution.csproj", "{BF5E6DB5-9829-4C95-9ECC-818B6D88689A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{01EA0FA5-A0E0-4132-97F6-42AC5A0C447C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controller", "Controller\Controller.csproj", "{5EC2BEB6-BFFB-4C69-A8E4-EC0DB73437B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{DAC8F365-6504-4180-B980-A2ABFABDD270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{DAC8F365-6504-4180-B980-A2ABFABDD270}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

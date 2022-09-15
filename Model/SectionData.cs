@@ -6,19 +6,11 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-   internal class SectionData
+   public class SectionData
    {
-      public IParticipant Left;
-      public IParticipant Right;
-      public int DistanceLeft;
-      public int DistanceRight;
-
-      public SectionData(IParticipant left, IParticipant right, int distanceLeft, int distanceRight)
-      {
-         Left = left;
-         Right = right;
-         DistanceLeft = distanceLeft;
-         DistanceRight = distanceRight;
-      }
+      public IParticipant Left { get; set; }
+      public int DistanceLeft { get; set; }
+      public IParticipant Right { get; set; }
+      public int DistanceRight { get; set; }
    }
 }
