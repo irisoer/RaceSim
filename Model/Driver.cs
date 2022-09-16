@@ -12,13 +12,13 @@ namespace Model
       {
          Name = name;
          Points = 0;
-         Equipment = equipment; 
-         Teamcolor = teamcolor; 
+         equipment = equipment; 
+         TeamColor = teamcolor; 
 
       }
       public string Name { get; set; }
       public int Points { get; set; }
-      public IEquipment Equipment { get; set; }
-      public IParticipant.TeamColors Teamcolor { get; set; }
+      public IEquipment equipment { get; set; }
+      public IParticipant.TeamColors TeamColor { get; set; }
    }
 }
