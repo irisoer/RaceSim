@@ -10,12 +10,17 @@ namespace Controller
 {
    public class Race
    {
+      #region Properties
       public Track Track { get; set; }
       public List<IParticipant> Participants { get; set; }
       public DateTime StartTime { get; set; }
-      private Random _random { get; set; }   
-      private Dictionary<Section, SectionData> _positions { get; set; } 
+      private Random _random;
+      private Dictionary<Section, SectionData> _positions;
+      public Random Random { get; set; }
+      public Dictionary<Section, SectionData> Positions { get; set; }
+      #endregion
 
+      #region Constructors
       public Race(Track track, List<IParticipant> participants)
       {
          Track = track;
@@ -23,7 +28,9 @@ namespace Controller
 
          _random = new Random(DateTime.Now.Millisecond);
       }
+      #endregion
 
+      #region Methods
       public SectionData GetSectionData(Section currentSection)
       {
          if (!_positions.ContainsKey(currentSection))
@@ -37,9 +44,10 @@ namespace Controller
       {
          foreach (var participant in Participants)
          {
-            int p = participant.equipment.Performance = _random.Next();
-            int q = participant.equipment.Quality = _random.Next();
+            int p = participant.Equipment.Performance = _random.Next();
+            int q = participant.Equipment.Quality = _random.Next();
          }
-      }
+      } 
+      #endregion
    }
 }

@@ -11,13 +11,17 @@ namespace ControllerTest
    [TestFixture]
    public class Model_Competition_NextTrackShould
    {
-      private Competition _competition { get; set; }
+      #region Properties
+      private Competition _competition { get; set; } 
+      #endregion
 
+      #region Constructors
       public Competition Competition
       {
          get { return _competition; }
          set { _competition = value; }
-      }
+      } 
+      #endregion
 
       #region Methods
       [SetUp]
@@ -26,6 +30,7 @@ namespace ControllerTest
          Competition = new Competition();
       }
 
+      #region Tests
       [Test]
       public void Next_Track_EmptyQueue_ReturnNull()
       {
@@ -63,7 +68,8 @@ namespace ControllerTest
          Assert.AreEqual(result, track1);
          result = Competition.NextTrack();
          Assert.AreEqual(result, track2);
-      }
+      } 
+      #endregion
 
       #endregion
    }

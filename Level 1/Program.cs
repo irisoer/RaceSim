@@ -4,7 +4,7 @@ using System.Threading.Channels;
 using Model;
 using Controller;
 
-namespace RaceSimSolution
+namespace RaceSim
 {
    class Program
    {
@@ -12,7 +12,7 @@ namespace RaceSimSolution
       {
          Data.Initialize();
          Data.NextRace();
-         Console.WriteLine(Data.CurrentRace.Track.Name);
+         Console.WriteLine(Visualisation.DrawTrack);
 
          for (; ; )
          {

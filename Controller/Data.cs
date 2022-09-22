@@ -11,43 +11,47 @@ namespace Controller
 {
    public static class Data
    {
-      public static Competition competition { get; set; }
+      #region Properties
+      public static Competition Competition { get; set; }
       public static Race CurrentRace { get; set; }
+      #endregion
 
+      #region Methods
       public static void Initialize()
       {
-         competition = new Competition();
-         addParticipants();
-         addTracks();
+         Competition = new Competition();
+         AddParticipants();
+         AddTracks();
       }
 
-      public static void addParticipants()
+      public static void AddParticipants()
       {
-         competition.Participants.Add(new Driver("Lola", new Car(10, 10, 10), IParticipant.TeamColors.Blue));
-         competition.Participants.Add(new Driver("Abel", new Car(10, 10, 10), IParticipant.TeamColors.Red));
-         competition.Participants.Add(new Driver("Marco", new Car(10, 10, 10), IParticipant.TeamColors.Yellow));
+         Competition.Participants.Add(new Driver("Lola", new Car(10, 10, 10), TeamColors.Blue));
+         Competition.Participants.Add(new Driver("Abel", new Car(10, 10, 10), TeamColors.Red));
+         Competition.Participants.Add(new Driver("Marco", new Car(10, 10, 10), TeamColors.Yellow));
 
       }
 
-      public static void addTracks()
+      public static void AddTracks()
       {
-         competition.Tracks.Enqueue(new Track("Zandvoort"));
-         competition.Tracks.Enqueue(new Track("Assen"));
+         Competition.Tracks.Enqueue(new Track("Zandvoort"));
+         Competition.Tracks.Enqueue(new Track("Assen"));
       }
 
       public static void NextRace()
       {
-         Track newTrack = competition.NextTrack();
-         if(newTrack != null)
+         Track newTrack = Competition.NextTrack();
+         if (newTrack != null)
          {
-            CurrentRace = new Race(newTrack, competition.Participants);
+            CurrentRace = new Race(newTrack, Competition.Participants);
          }
          else
          {
             CurrentRace = null;
          }
-      }
-      
-      
+      } 
+      #endregion
+
+
    }
 }

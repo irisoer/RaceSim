@@ -8,17 +8,21 @@ namespace Model
 {
    public class Driver : IParticipant
    {
-      public Driver(string name, IEquipment equipment, IParticipant.TeamColors teamcolor)
+      #region Constructor
+      public Driver(string name, IEquipment equipment, TeamColors teamcolor)
       {
          Name = name;
          Points = 0;
-         equipment = equipment; 
-         TeamColor = teamcolor; 
+         this.Equipment = equipment;
+         TeamColor = teamcolor;
 
       }
+      #endregion
+      #region Get-Set
       public string Name { get; set; }
       public int Points { get; set; }
-      public IEquipment equipment { get; set; }
-      public IParticipant.TeamColors TeamColor { get; set; }
+      public IEquipment Equipment { get; set; }
+      public TeamColors TeamColor { get; set; } 
+      #endregion
    }
 }
