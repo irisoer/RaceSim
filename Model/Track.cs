@@ -11,11 +11,11 @@ namespace Model
    {
       #region Properties
       public string Name { get; set; }
-      public LinkedList<Section> Sections { get; set; }
+      public LinkedList<Sections> Sections { get; set; }
       #endregion
 
       #region Constructors
-      public Track(string name, Section.SectionTypes[] sections)
+      public Track(string name, SectionTypes[] sections)
       {
          Name = name;
          Sections = ConvertSectionsArrayToList(sections);
@@ -29,12 +29,12 @@ namespace Model
 
       #region Methods
 
-      public LinkedList<Section> ConvertSectionsArrayToList(Section.SectionTypes[] sectionsArray)
+      public LinkedList<Sections> ConvertSectionsArrayToList(SectionTypes[] sectionsArray)
       {
-         LinkedList<Section> sectionsList = new LinkedList<Section>();
+         LinkedList<Sections> sectionsList = new LinkedList<Sections>();
          for (int i = 0; i < sectionsArray.Length; i++)
          {
-            Section section = new Section(sectionsArray[i]);
+            Sections section = new Sections(sectionsArray[i]);
             sectionsList.AddLast(section);
          }
 

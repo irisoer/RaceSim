@@ -4,15 +4,18 @@ using System.Threading.Channels;
 using Model;
 using Controller;
 
+
 namespace RaceSim
 {
    class Program
    {
       static void Main(string[] args)
       {
+         Console.BackgroundColor = ConsoleColor.Black;
          Data.Initialize();
          Data.NextRace();
-         Console.WriteLine(Visualisation.DrawTrack);
+         Visualisation.Initialize(Data.CurrentRace.Track);
+        
 
          for (; ; )
          {

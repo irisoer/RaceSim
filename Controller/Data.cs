@@ -22,6 +22,7 @@ namespace Controller
          Competition = new Competition();
          AddParticipants();
          AddTracks();
+         NextRace();
       }
 
       public static void AddParticipants()
@@ -34,8 +35,22 @@ namespace Controller
 
       public static void AddTracks()
       {
-         Competition.Tracks.Enqueue(new Track("Zandvoort"));
-         Competition.Tracks.Enqueue(new Track("Assen"));
+         Competition.Tracks.Enqueue(new Track("Zandvoort", new[]
+         {
+            SectionTypes.StartGrid,
+            SectionTypes.Finish,
+            SectionTypes.LeftCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.LeftCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.LeftCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.LeftCorner
+
+         }));
       }
 
       public static void NextRace()
@@ -44,10 +59,6 @@ namespace Controller
          if (newTrack != null)
          {
             CurrentRace = new Race(newTrack, Competition.Participants);
-         }
-         else
-         {
-            CurrentRace = null;
          }
       } 
       #endregion

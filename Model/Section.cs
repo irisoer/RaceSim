@@ -5,11 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Model
-{
-
-   public class Section
-   {
-      public enum SectionTypes
+{      public enum SectionTypes
       {
          Straight,
          LeftCorner,
@@ -17,10 +13,13 @@ namespace Model
          StartGrid,
          Finish
       }
+   public class Sections
+   {
+
 
       public SectionTypes SectionType { get; set; }
 
-      public Section(SectionTypes section)
+      public Sections(SectionTypes section)
       {
          SectionType = section;
       }

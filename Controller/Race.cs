@@ -15,9 +15,9 @@ namespace Controller
       public List<IParticipant> Participants { get; set; }
       public DateTime StartTime { get; set; }
       private Random _random;
-      private Dictionary<Section, SectionData> _positions;
+      private Dictionary<Sections, SectionData> _positions;
       public Random Random { get; set; }
-      public Dictionary<Section, SectionData> Positions { get; set; }
+      public Dictionary<Sections, SectionData> Positions { get; set; }
       #endregion
 
       #region Constructors
@@ -31,7 +31,7 @@ namespace Controller
       #endregion
 
       #region Methods
-      public SectionData GetSectionData(Section currentSection)
+      public SectionData GetSectionData(Sections currentSection)
       {
          if (!_positions.ContainsKey(currentSection))
          {
