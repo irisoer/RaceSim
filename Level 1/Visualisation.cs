@@ -23,7 +23,7 @@ namespace RaceSim
       public static Race _currentRace;
       public static SectionTypes _lastSection;
       public static int XPos = 40;
-      public static int YPos = 20;
+      public static int YPos = 2;
 
       //start position
 
@@ -45,54 +45,54 @@ namespace RaceSim
 
       private static string[] _finishHorizontal = {
          "───────",
-         "░      ",
-         "░      ",
+         "░ 1    ",
+         "░   2  ",
          "───────"
       };
       private static string[] _finishVertical = { 
          "│     │",
          "│░░░░░│",
-         "│░░░░░│", 
-         "│     │" };
+         "│ 1   │", 
+         "│   2 │" };
       private static string[] _startHorizontal = {
          "───────",
-         " [ ]   ",
-         "   [ ] ",
+         " [1]   ",
+         "   [2] ",
          "───────"};
       private static string[] _startVertical = { 
-         "│  │", 
-         " [] ", 
-         " [] ", 
-         "│  │" };
+         "│     │",
+         "│  [1]│",
+         "│[2]  │", 
+         "│     │" };
       private static string[] _straightHorizontal = {
          "───────", 
-         "       ", 
-         "       ",
+         "  1    ", 
+         "    2  ",
          "───────"};
       private static string[] _straightVertical = { 
          "│     │", 
-         "│     │", 
-         "│     │", 
+         "│ 1   │", 
+         "│   2 │", 
          "│     │" };
       private static string[] _cornerRightDown = {
          "──────┐", 
-         "      │", 
-         "      │", 
+         "  1   │", 
+         "    2 │", 
          "┐     │"};
       private static string[] _cornerDownLeft = { 
-         "┘     │", 
-         "      │", 
+         "┘ 1   │", 
+         "   2  │", 
          "      │",
          "──────┘"};
       private static string[] _cornerLeftUp = {
          "│     └", 
-         "│      ", 
-         "│      ",
+         "│  1   ", 
+         "│    2 ",
          "└──────" };
       private static string[] _cornerRightUp = {
          "┌──────", 
-         "│      ", 
-         "│      ",
+         "│ 1    ", 
+         "│   2  ",
          "│     ┌"};
       #endregion
 
@@ -101,11 +101,13 @@ namespace RaceSim
       {
          _direction = Direction.East;
          Console.CursorVisible = false;
-         DrawTrack(track);
-        }
+      }
 
       public static void DrawTrack(Track t)
       {
+         Console.CursorLeft = 30;
+         Console.CursorTop = 1;
+         Console.WriteLine($"The next Track in this competition is: {t.Name}");
          foreach (Sections section in t.Sections)
          {
             Console.CursorLeft = XPos;
@@ -118,19 +120,11 @@ namespace RaceSim
                   _lastSection = SectionTypes.StartGrid;
                   if (_direction == Direction.East || _direction == Direction.West)
                   {
-                     foreach (var line in _startHorizontal)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_startHorizontal, section);
                   }
                   else
                   {
-                     foreach (var line in _startVertical)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_startVertical, section);
                   }
                   
                   break;
@@ -140,19 +134,11 @@ namespace RaceSim
                   _lastSection = SectionTypes.Straight;
                   if (_direction == Direction.East || _direction == Direction.West)
                   {
-                     foreach (var line in _straightHorizontal)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_straightHorizontal, section);
                   }
                   else
                   {
-                     foreach (var line in _straightVertical)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_straightVertical, section);
                   }
                   break;
                #endregion
@@ -161,39 +147,24 @@ namespace RaceSim
                   _lastSection = SectionTypes.LeftCorner;
                   if (_direction == Direction.East)
                   {
-                     foreach (var line in _cornerDownLeft)
-                     {
-                        Console.CursorLeft = XPos;
-                        
-                        Console.WriteLine($"{line}");
-                     }
+                      DrawSection(_cornerDownLeft, section);
+                    
                      _direction = Direction.North;
                   }
                   else if (_direction == Direction.North)
                   {
-                     foreach (var line in _cornerRightDown)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_cornerRightDown, section);
+                     
                      _direction = Direction.West;
                   }
                   else if (_direction == Direction.West)
                   {
-                     foreach (var line in _cornerRightUp)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_cornerRightUp, section);
                      _direction = Direction.South;
                   }
                   else //south
                   {
-                     foreach (var line in _cornerLeftUp)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_cornerLeftUp, section);
                      _direction = Direction.East;
                   }
                   break;
@@ -203,41 +174,25 @@ namespace RaceSim
                   _lastSection = SectionTypes.RightCorner;
                   if (_direction == Direction.East)
                   {
-                     foreach (var line in _cornerRightDown)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_cornerRightDown, section);
                      _direction = Direction.South;
                      
                   }
                   else if (_direction == Direction.West)
                   {
-                     foreach (var line in _cornerLeftUp)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_cornerLeftUp, section);
                      _direction = Direction.North;
                      
                   }
                   else if (_direction == Direction.North)
                   {
-                     foreach (var line in _cornerRightUp)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_cornerRightUp, section);
                      _direction = Direction.East;
                      
                   }
                   else if (_direction == Direction.South)
                   {
-                     foreach (var line in _cornerDownLeft)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_cornerDownLeft, section);
                      _direction = Direction.West;
                     
                   }
@@ -248,19 +203,11 @@ namespace RaceSim
                   _lastSection = SectionTypes.Finish; 
                   if (_direction == Direction.East || _direction == Direction.West)
                   {
-                     foreach (var line in _finishHorizontal)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_finishHorizontal, section);
                   }
                   else
                   {
-                     foreach (var line in _finishVertical)
-                     {
-                        Console.CursorLeft = XPos;
-                        Console.WriteLine($"{line}");
-                     }
+                     DrawSection(_finishVertical, section);
                   }
                   break;
                   #endregion
@@ -270,6 +217,20 @@ namespace RaceSim
             CalculateCursurPosition();
          }
          
+      }
+
+      public static void DrawSection(string[] sectionStrings, Sections section)
+      {
+         IParticipant left, right; 
+         foreach(string s in sectionStrings)
+         {
+            Console.CursorLeft = XPos;
+            string ss = s;
+            left = Data.CurrentRace.GetSectionData(section).Left;
+            right = Data.CurrentRace.GetSectionData(section).Right;
+            ss = PlaceParticipants(s, left, right);
+            Console.WriteLine(ss);
+         }
       }
 
       public static void CalculateCursurPosition()
@@ -295,6 +256,34 @@ namespace RaceSim
            
 
             }
+      }
+
+      public static string PlaceParticipants(string letter, IParticipant left, IParticipant right)
+      {
+         if( left != null)
+         {
+            letter = letter.Replace("1", left.Name.Substring(0, 1));
+         }
+         else
+         {
+            letter = letter.Replace("1", " ");
+         }
+
+         if( right != null)
+         {
+            letter = letter.Replace("2", right.Name.Substring(0, 1));
+         }
+         else
+         {
+            letter = letter.Replace("2", " ");
+         }
+
+         return letter; 
+      }
+
+      public static void DriversChangedEventHandlerMethod(DriversChangedEventArgs e)
+      {
+         DrawTrack(e.Track);
       }
 
 

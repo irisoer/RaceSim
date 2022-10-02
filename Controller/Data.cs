@@ -30,27 +30,101 @@ namespace Controller
          Competition.Participants.Add(new Driver("Lola", new Car(10, 10, 10), TeamColors.Blue));
          Competition.Participants.Add(new Driver("Abel", new Car(10, 10, 10), TeamColors.Red));
          Competition.Participants.Add(new Driver("Marco", new Car(10, 10, 10), TeamColors.Yellow));
-
+         Competition.Participants.Add(new Driver("Perry", new Car(10, 10, 10), TeamColors.Turqoise));
+         Competition.Participants.Add(new Driver("Willem", new Car(10, 10, 10), TeamColors.Orange));
+         Competition.Participants.Add(new Driver("Elizabeth", new Car(10, 10, 10), TeamColors.White));
       }
 
       public static void AddTracks()
       {
+         #region Zandvoort
          Competition.Tracks.Enqueue(new Track("Zandvoort", new[]
-         {
+            {
+            SectionTypes.StartGrid,
+            SectionTypes.StartGrid,
             SectionTypes.StartGrid,
             SectionTypes.Finish,
-            SectionTypes.LeftCorner,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
             SectionTypes.Straight,
             SectionTypes.Straight,
             SectionTypes.LeftCorner,
             SectionTypes.Straight,
+            SectionTypes.LeftCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.RightCorner,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.LeftCorner,
             SectionTypes.Straight,
             SectionTypes.LeftCorner,
             SectionTypes.Straight,
             SectionTypes.Straight,
-            SectionTypes.LeftCorner
-
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.RightCorner,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
          }));
+         #endregion
+         #region Assen
+         Competition.Tracks.Enqueue(new Track("Assen", new[]
+         {
+            SectionTypes.StartGrid,
+            SectionTypes.StartGrid,
+            SectionTypes.StartGrid,
+            SectionTypes.Finish,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.RightCorner,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.LeftCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.LeftCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.RightCorner,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.Straight,
+            SectionTypes.RightCorner,
+            SectionTypes.Straight
+         }));
+         #endregion
       }
 
       public static void NextRace()

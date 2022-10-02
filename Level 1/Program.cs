@@ -13,7 +13,6 @@ namespace RaceSim
       {
          Console.BackgroundColor = ConsoleColor.Black;
          Data.Initialize();
-         Data.NextRace();
          Visualisation.Initialize(Data.CurrentRace.Track);
         
 

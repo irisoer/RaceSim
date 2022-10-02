@@ -10,10 +10,12 @@ namespace Model
    public enum TeamColors
    {
       Red,
-      Green,
+      Orange,
       Blue,
       Yellow,
-      Grey
+      White,
+      Turqoise,
+
    } 
    #endregion
 
