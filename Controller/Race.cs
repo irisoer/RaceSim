@@ -38,6 +38,7 @@ namespace Controller
          _random = new Random(DateTime.Now.Millisecond);
          RandomizeEquipment();
          ParticipantsPosition(track, participants);
+         Start(); 
       }
       #endregion
 
@@ -50,7 +51,7 @@ namespace Controller
 
       public void OnTimedEvent(object o, EventArgs e)
       {
-         DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
+         DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
       }
 
       public SectionData GetSectionData(Sections currentSection)

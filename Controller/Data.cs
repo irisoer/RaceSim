@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 
+
 namespace Controller
 {
    public static class Data
@@ -134,6 +135,12 @@ namespace Controller
          {
             CurrentRace = new Race(newTrack, Competition.Participants);
          }
+         else
+         {
+            CurrentRace = null;
+            Console.WriteLine("No more races");
+         }
+
       } 
       #endregion
 

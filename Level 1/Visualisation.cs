@@ -97,10 +97,11 @@ namespace RaceSim
       #endregion
 
 
-      public static void Initialize(Track track)
+      public static void Initialize()
       {
          _direction = Direction.East;
          Console.CursorVisible = false;
+         Data.CurrentRace.DriversChanged += DriversChangedEventHandlerMethod;
       }
 
       public static void DrawTrack(Track t)
@@ -281,7 +282,7 @@ namespace RaceSim
          return letter; 
       }
 
-      public static void DriversChangedEventHandlerMethod(DriversChangedEventArgs e)
+      public static void DriversChangedEventHandlerMethod(object? obj,DriversChangedEventArgs e)
       {
          DrawTrack(e.Track);
       }
