@@ -28,12 +28,10 @@ namespace Controller
 
       public static void AddParticipants()
       {
-         Competition.Participants.Add(new Driver("Lola", new Car(10, 10, 10), TeamColors.Blue));
-         Competition.Participants.Add(new Driver("Abel", new Car(10, 10, 10), TeamColors.Red));
-         Competition.Participants.Add(new Driver("Marco", new Car(10, 10, 10), TeamColors.Yellow));
-         Competition.Participants.Add(new Driver("Perry", new Car(10, 10, 10), TeamColors.Turqoise));
-         Competition.Participants.Add(new Driver("Willem", new Car(10, 10, 10), TeamColors.Orange));
-         Competition.Participants.Add(new Driver("Elizabeth", new Car(10, 10, 10), TeamColors.White));
+         Competition.Participants.Add(new Driver("Lola", TeamColors.Blue));
+         Competition.Participants.Add(new Driver("Abel", TeamColors.Red));
+         Competition.Participants.Add(new Driver("Marco", TeamColors.Yellow));
+         Competition.Participants.Add(new Driver("Perry", TeamColors.Turqoise));
       }
 
       public static void AddTracks()
@@ -41,7 +39,6 @@ namespace Controller
          #region Zandvoort
          Competition.Tracks.Enqueue(new Track("Zandvoort", new[]
             {
-            SectionTypes.StartGrid,
             SectionTypes.StartGrid,
             SectionTypes.StartGrid,
             SectionTypes.Finish,
@@ -87,6 +84,7 @@ namespace Controller
             SectionTypes.RightCorner,
             SectionTypes.RightCorner,
             SectionTypes.Straight,
+            SectionTypes.Straight
          }));
          #endregion
          #region Assen

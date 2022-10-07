@@ -12,5 +12,23 @@ namespace Model
       public int DistanceLeft { get; set; }
       public IParticipant Right { get; set; }
       public int DistanceRight { get; set; }
+      public bool IsFull { get; set; } 
+
+
+      public int GetParticipantPosition(IParticipant participant)
+      {
+         if (participant == Left)
+         {
+            return DistanceLeft;
+         }
+         else if (participant == Right)
+         {
+            return DistanceRight;
+         }
+         else
+         {
+            throw new Exception("There is no participant!");
+         }
+      }
    }
 }

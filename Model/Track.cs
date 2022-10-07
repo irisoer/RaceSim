@@ -12,6 +12,8 @@ namespace Model
       #region Properties
       public string Name { get; set; }
       public LinkedList<Sections> Sections { get; set; }
+      public Sections FirstSection { get; set; }
+      public Sections LastSection { get; set; }
       #endregion
 
       #region Constructors
@@ -36,6 +38,14 @@ namespace Model
          {
             Sections section = new Sections(sectionsArray[i]);
             sectionsList.AddLast(section);
+            if(i == 0)
+            {
+               FirstSection = section;
+            }
+            if(i == sectionsArray.Length - 1)
+            {
+               LastSection = section;
+            }
          }
 
          return sectionsList;

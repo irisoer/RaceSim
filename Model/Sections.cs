@@ -18,6 +18,7 @@ namespace Model
    {
 
       public SectionTypes SectionType { get; set; }
+      public static int SectionLength = 100;
 
       public Sections(SectionTypes sectionType)
       {

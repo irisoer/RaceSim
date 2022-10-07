@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Versioning;
+using System.Diagnostics;
 
 namespace RaceSim
 {
@@ -18,14 +19,13 @@ namespace RaceSim
    }
    public static class Visualisation
    {
-      public static Direction _direction;
-      public static Direction _newDirection; 
-      public static Race _currentRace;
-      public static SectionTypes _lastSection;
-      public static int XPos = 40;
+      public static Direction _direction { get; set; } 
+      public static Direction _newDirection { get; set; }
+      public static Race _currentRace { get; set; }
+      public static SectionTypes _lastSection { get; set; }
+      public static int XPos = 40; 
       public static int YPos = 2;
 
-      //start position
 
       #region Graphics
       #region SymbolNumbers
@@ -45,54 +45,54 @@ namespace RaceSim
 
       private static string[] _finishHorizontal = {
          "───────",
-         "░ 1    ",
-         "░   2  ",
+         "░ 2    ",
+         "░   1  ",
          "───────"
       };
       private static string[] _finishVertical = { 
          "│     │",
          "│░░░░░│",
-         "│ 1   │", 
-         "│   2 │" };
-      private static string[] _startHorizontal = {
+         "│ 2   │", 
+         "│   1 │" };
+      private static string[] _startHorizontal = { //misschien 1 en 2 omdraaien ivm logica 
          "───────",
-         " [1]   ",
-         "   [2] ",
+         " [2]   ",
+         "   [1] ",
          "───────"};
       private static string[] _startVertical = { 
          "│     │",
-         "│  [1]│",
-         "│[2]  │", 
+         "│  [2]│",
+         "│[1]  │", 
          "│     │" };
       private static string[] _straightHorizontal = {
          "───────", 
-         "  1    ", 
-         "    2  ",
+         "  2    ", 
+         "    1  ",
          "───────"};
       private static string[] _straightVertical = { 
          "│     │", 
-         "│ 1   │", 
-         "│   2 │", 
+         "│ 2   │", 
+         "│   1 │", 
          "│     │" };
       private static string[] _cornerRightDown = {
          "──────┐", 
-         "  1   │", 
-         "    2 │", 
+         "  2   │", 
+         "    1 │", 
          "┐     │"};
       private static string[] _cornerDownLeft = { 
-         "┘ 1   │", 
-         "   2  │", 
+         "┘ 2   │", 
+         "   1  │", 
          "      │",
          "──────┘"};
       private static string[] _cornerLeftUp = {
          "│     └", 
-         "│  1   ", 
-         "│    2 ",
+         "│  2   ", 
+         "│    1 ",
          "└──────" };
       private static string[] _cornerRightUp = {
          "┌──────", 
-         "│ 1    ", 
-         "│   2  ",
+         "│ 2    ", 
+         "│   1  ",
          "│     ┌"};
       #endregion
 
@@ -263,20 +263,20 @@ namespace RaceSim
       {
          if( left != null)
          {
-            letter = letter.Replace("1", left.Name.Substring(0, 1));
-         }
-         else
-         {
-            letter = letter.Replace("1", " ");
-         }
-
-         if( right != null)
-         {
-            letter = letter.Replace("2", right.Name.Substring(0, 1));
+            letter = letter.Replace("2", left.Name.Substring(0, 1));
          }
          else
          {
             letter = letter.Replace("2", " ");
+         }
+
+         if( right != null)
+         {
+            letter = letter.Replace("1", right.Name.Substring(0, 1));
+         }
+         else
+         {
+            letter = letter.Replace("1", " ");
          }
 
          return letter; 

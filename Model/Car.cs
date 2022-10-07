@@ -23,6 +23,7 @@ namespace Model
          Speed = speed;
          IsBroken = false;
       } 
+
       #endregion
    }
 }

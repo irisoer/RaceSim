@@ -9,11 +9,10 @@ namespace Model
    public class Driver : IParticipant
    {
       #region Constructor
-      public Driver(string name, IEquipment equipment, TeamColors teamcolor)
+      public Driver(string name, TeamColors teamcolor)
       {
          Name = name;
          Points = 0;
-         this.Equipment = equipment;
          TeamColor = teamcolor;
 
       }
@@ -22,7 +21,9 @@ namespace Model
       public string Name { get; set; }
       public int Points { get; set; }
       public IEquipment Equipment { get; set; }
-      public TeamColors TeamColor { get; set; } 
+      public TeamColors TeamColor { get; set; }
+      public LinkedListNode<Sections> CurrentSection { get; set; }
+
       #endregion
    }
 }

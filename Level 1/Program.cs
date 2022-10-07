@@ -14,6 +14,7 @@ namespace RaceSim
          Console.BackgroundColor = ConsoleColor.Black;
          Data.Initialize();
          Visualisation.Initialize();
+         Data.CurrentRace.Start();
         
 
          for (; ; )
