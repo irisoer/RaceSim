@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,10 @@ namespace Controller
          Competition = new Competition();
          AddParticipants();
          AddTracks();
+         if (Competition.Tracks.Count < 2) //check if there are at least 2 tracks in competition
+         {
+            throw new ArgumentException("There must be at least 2 tracks in a competition");
+         }
          NextRace();
       }
 
@@ -92,7 +97,6 @@ namespace Controller
          {
             SectionTypes.StartGrid,
             SectionTypes.StartGrid,
-            SectionTypes.StartGrid,
             SectionTypes.Finish,
             SectionTypes.RightCorner,
             SectionTypes.Straight,
@@ -121,8 +125,9 @@ namespace Controller
             SectionTypes.Straight,
             SectionTypes.Straight,
             SectionTypes.RightCorner,
+            SectionTypes.Straight,
             SectionTypes.Straight
-         }));
+         })); ;
          #endregion
       }
 

@@ -109,7 +109,7 @@ namespace RaceSim
          Console.CursorLeft = 30;
          Console.CursorTop = 1;
          Console.WriteLine($"The next Track in this competition is: {t.Name}");
-         foreach (Sections section in t.Sections)
+         foreach (Section section in t.Sections)
          {
             Console.CursorLeft = XPos;
             Console.CursorTop = YPos;
@@ -220,7 +220,7 @@ namespace RaceSim
          
       }
 
-      public static void DrawSection(string[] sectionStrings, Sections section)
+      public static void DrawSection(string[] sectionStrings, Section section)
       {
          IParticipant left, right; 
          foreach(string s in sectionStrings)

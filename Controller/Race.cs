@@ -13,18 +13,18 @@ namespace Controller
    {
       #region Properties
       private Random _random;
-      private Dictionary<Sections, SectionData> _positions;
+      private Dictionary<Section, SectionData> _positions;
       public Timer _timer { get; set; }
-      
+
       public int PlaceOnSection { get; set; }
       public Track Track { get; set; }
       public DateTime StartTime { get; set; }
       public Random Random { get; set; }
 
       public List<IParticipant> Participants { get; set; }
-      public Dictionary<Sections, SectionData> Positions { get; set; }
+      public Dictionary<Section, SectionData> Positions { get; set; }
 
-      public event EventHandler<DriversChangedEventArgs> DriversChanged; 
+      public event EventHandler<DriversChangedEventArgs> DriversChanged;
       #endregion
 
       #region Constructors
@@ -32,7 +32,7 @@ namespace Controller
       {
          Track = track;
          Participants = participants;
-         _positions = new Dictionary<Sections, SectionData>();
+         _positions = new Dictionary<Section, SectionData>();
          _timer = new Timer(250);
          _timer.Elapsed += OnTimedEvent;
 
@@ -56,7 +56,7 @@ namespace Controller
          }
       }
 
-      public SectionData GetSectionData(Sections currentSection)
+      public SectionData GetSectionData(Section currentSection)
       {
          if (!_positions.ContainsKey(currentSection))
          {
@@ -67,12 +67,29 @@ namespace Controller
 
       public void ParticipantsStartPosition(Track track, List<IParticipant> participants) //todo methodes werkwoorden meegeven
       {
+         if(participants.Count < 3) //check if there are 3 or more drivers
+         {
+            throw new ArgumentException("There must be at least 3 drivers in a race");
+         }
+         if(participants.Count > 4)
+         {
+            throw new ArgumentException("There can not be more than 4 drivers");
+         }
+         foreach(IParticipant participant in participants) //check if teamcolor is unique
+         {
+            foreach (IParticipant obj in participants) {
+               if (participant.TeamColor.Equals(obj.TeamColor) && participant != obj)
+               {
+                  throw new ArgumentException("Team Color must be unique");
+               }
+             }
+         }
          List<IParticipant> tempParticipants = new List<IParticipant>(participants);
-         for (LinkedListNode<Sections> section = track.Sections.Last;
-            section != null && participants.Count > 0; section = section.Previous)
+         for (LinkedListNode<Section> section = track.Sections.Last;
+            section != null && participants.Count > 0; section = section.Previous) //go backwards so you fill in the startgrids from the first position to the last 
          {
             if (section.Value.SectionType != SectionTypes.StartGrid)
-               continue;
+               continue; //if sectiontype isn't startgrid continue looking for startgrids
             if (tempParticipants.Count == 0)
                return;
 
@@ -83,7 +100,6 @@ namespace Controller
                data.Left = tempParticipants[randParticipantNumber];
                tempParticipants[randParticipantNumber].CurrentSection = section;
                tempParticipants.Remove(data.Left);
-
             }
 
             if (tempParticipants.Count > 0)
@@ -96,63 +112,49 @@ namespace Controller
          }
       }
 
+
       public void OnTimedEvent(object o, EventArgs e)
       {
          foreach (IParticipant participant in Participants)
          {
             int distance = (participant.Equipment.Speed * participant.Equipment.Performance);
-            LinkedListNode<Sections> currentSection = participant.CurrentSection;
+            LinkedListNode<Section> currentSection = participant.CurrentSection;
             SectionData sectiondata = GetSectionData(currentSection.ValueRef);
             int newPosition = distance + sectiondata.GetParticipantPosition(participant);
-            bool next = newPosition >= Sections.SectionLength;
+            bool next = newPosition >= Section.SectionLength;
+
             if (next)
             {
-
                participant.CurrentSection = currentSection.Next ?? currentSection.List.First;
 
-               newPosition -= Sections.SectionLength;
+               newPosition -= Section.SectionLength;
                if (participant == sectiondata.Left) //remove driver from last section
                {
                   sectiondata.Left = null;
-                  //sectiondata.DistanceLeft = 0;
-                  sectiondata.IsFull = false;
+                  sectiondata.DistanceLeft = 0;
                }
                else if (participant == sectiondata.Right)
                {
                   sectiondata.Right = null;
-                  //sectiondata.DistanceRight = 0;
-                  sectiondata.IsFull = false;
+                  sectiondata.DistanceRight = 0;
                }
-               SectionData sd = GetSectionData(participant.CurrentSection.Value);
-               if (sd.IsFull == true) //add participant 
+
+               sectiondata = GetSectionData(participant.CurrentSection.ValueRef); //get new sectiondata
+               if (sectiondata.IsFull())
                {
                   participant.CurrentSection = participant.CurrentSection.Next;
-                  sd = GetSectionData(participant.CurrentSection.ValueRef);
-                  if(participant == sectiondata.Left)
-                  {
-                     sectiondata.DistanceLeft = 0;
-                  }
-                  else
-                  {
-                     sectiondata.DistanceRight = 0;
-                  }
+                  sectiondata = GetSectionData(participant.CurrentSection.ValueRef);
                }
-               else
+               if (sectiondata.Left is null)
                {
-                  if (sd.Left == null || sd.Right != null)
-                  {
-                     sd.Left = participant;
-                     sd.DistanceLeft = distance;
-                  }
-                  else if (sd.Right == null || sd.Left != null)
-                  {
-                     sd.Right = participant;
-                     sd.DistanceRight = distance;
-                  }
-                  sd.IsFull = sd.Left != null && sd.Right != null;
-                  participant.CurrentSection = currentSection.Next;
+                  sectiondata.Left = participant;
+                  sectiondata.DistanceLeft += newPosition;
                }
-               
+               else if (sectiondata.Right is null)
+               {
+                  sectiondata.Right = participant;
+                  sectiondata.DistanceRight += newPosition;
+               }
             }
             else
             {
@@ -164,14 +166,10 @@ namespace Controller
                {
                   sectiondata.DistanceRight += distance;
                }
-               else
-               {
-                  throw new Exception("Driver not found");
-               }
             }
          }
          DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
-       }
+      }
 
 
       #endregion

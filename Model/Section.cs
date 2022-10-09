@@ -14,13 +14,13 @@ namespace Model
          StartGrid,
          Finish
       }
-   public class Sections
+   public class Section
    {
 
       public SectionTypes SectionType { get; set; }
       public static int SectionLength = 100;
 
-      public Sections(SectionTypes sectionType)
+      public Section(SectionTypes sectionType)
       {
          SectionType = sectionType;
       }
@@ -30,7 +30,7 @@ namespace Model
       {
          if(obj is SectionTypes objSectionType)
             return SectionType.Equals(objSectionType);
-         if (obj is Sections objSection)
+         if (obj is Section objSection)
             return SectionType.Equals(objSection.SectionType);
          return false;
       }
