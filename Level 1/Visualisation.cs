@@ -99,13 +99,14 @@ namespace RaceSim
 
       public static void Initialize()
       {
-         _direction = Direction.East;
-         Console.CursorVisible = false;
          Data.CurrentRace.DriversChanged += DriversChangedEventHandlerMethod;
+         Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
       }
 
       public static void DrawTrack(Track t)
       {
+         _direction = Direction.East;
+         Console.CursorVisible = false;
          Console.CursorLeft = 30;
          Console.CursorTop = 1;
          Console.WriteLine($"The next Track in this competition is: {t.Name}");
@@ -282,9 +283,19 @@ namespace RaceSim
          return letter; 
       }
 
-      public static void DriversChangedEventHandlerMethod(object? obj,DriversChangedEventArgs e)
+      public static void DriversChangedEventHandlerMethod(object? obj, DriversChangedEventArgs e)
       {
          DrawTrack(e.Track);
+      }
+
+      public static void RaceChangedDelegateMethod(Race previousRace, Race newRace)
+      {
+         Data.CurrentRace.ClearEvents();
+         if(Data.CurrentRace != null)
+         {
+            Initialize();
+         }
+
       }
 
 

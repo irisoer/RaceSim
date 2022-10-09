@@ -23,7 +23,7 @@ namespace ControllerTest
       [Test]
       public void GetSectionData_ReturnsData()
       {
-         track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
+         track = new Track("test", 2,new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
          Participants = new List<IParticipant>();
          Participants.Add(new Driver("Lola", TeamColors.Blue));
          Participants.Add(new Driver("Thijmen", TeamColors.Yellow));
@@ -38,7 +38,7 @@ namespace ControllerTest
       {
          try
          {
-            track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
+            track = new Track("test", 2, new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
             Participants = new List<IParticipant>();
             Participants.Add(new Driver("Lola", TeamColors.Blue));
             Participants.Add(new Driver("Thijmen", TeamColors.Yellow));
@@ -57,7 +57,7 @@ namespace ControllerTest
       {
          try
          {
-            track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
+            track = new Track("test", 2,new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
             Participants = new List<IParticipant>();
             Participants.Add(new Driver("Lola", TeamColors.Blue));
             Participants.Add(new Driver("Thijmen", TeamColors.Yellow));
@@ -77,7 +77,7 @@ namespace ControllerTest
       {
          try
          {
-            track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
+            track = new Track("test", 2, new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
             Participants = new List<IParticipant>();
             Participants.Add(new Driver("Lola", TeamColors.Blue));
             Participants.Add(new Driver("Thijmen", TeamColors.Yellow));
@@ -100,7 +100,7 @@ namespace ControllerTest
       {
          try
          {
-            track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
+            track = new Track("test", 2, new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
             Participants = new List<IParticipant>();
             Participants.Add(new Driver("Lola", TeamColors.Blue));
             Participants.Add(new Driver("Thijmen", TeamColors.Yellow));

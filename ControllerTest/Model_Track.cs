@@ -18,7 +18,7 @@ namespace ControllerTest
       {
          try
          {
-            Track track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
+            Track track = new Track("test", 2, new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish });
          }
          catch (Exception)
          {
@@ -31,7 +31,7 @@ namespace ControllerTest
       {
          try
          {
-            Track track1 = new Track("test1", new SectionTypes[] { SectionTypes.Finish, SectionTypes.StartGrid, SectionTypes.StartGrid });
+            Track track1 = new Track("test1", 2, new SectionTypes[] { SectionTypes.Finish, SectionTypes.StartGrid, SectionTypes.StartGrid });
          }
          catch (System.ArgumentException e)
          {
@@ -47,7 +47,7 @@ namespace ControllerTest
       {
          try
          {
-            Track track2 = new Track("test2", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.StartGrid });
+            Track track2 = new Track("test2", 2, new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.StartGrid });
          }
          catch (System.ArgumentException e)
          {
@@ -62,7 +62,7 @@ namespace ControllerTest
       {
          try
          {
-            Track track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.Straight });
+            Track track = new Track("test", 2,new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.Straight });
          }
          catch (Exception)
          {
@@ -74,7 +74,7 @@ namespace ControllerTest
       {
          try
          {
-            Track track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.StartGrid });
+            Track track = new Track("test", 2, new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.StartGrid });
          }
          catch(ArgumentException e)
          {
@@ -89,7 +89,7 @@ namespace ControllerTest
       {
          try
          {
-            Track track = new Track("test", new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.Finish });
+            Track track = new Track("test", 2, new SectionTypes[] { SectionTypes.StartGrid, SectionTypes.StartGrid, SectionTypes.Finish, SectionTypes.Finish });
          }
          catch (ArgumentException e)
          {
