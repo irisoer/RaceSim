@@ -99,6 +99,7 @@ namespace RaceSim
 
       public static void Initialize()
       {
+         Console.Clear();
          Data.CurrentRace.DriversChanged += DriversChangedEventHandlerMethod;
          Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
       }
@@ -295,12 +296,10 @@ namespace RaceSim
 
       public static void RaceChangedDelegateMethod(Race previousRace, Race newRace)
       {
-         Data.CurrentRace.ClearEvents();
-         if(Data.CurrentRace != null)
-         {
-            Initialize();
-         }
-
+         previousRace.DriversChanged -= DriversChangedEventHandlerMethod;
+         newRace.DriversChanged += DriversChangedEventHandlerMethod;
+         previousRace.RaceChanged -= RaceChangedDelegateMethod;
+         newRace.RaceChanged += RaceChangedDelegateMethod;
       }
 
 

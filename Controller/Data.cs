@@ -131,7 +131,7 @@ namespace Controller
          #endregion
       }
 
-      public static Race NextRace()
+      public static void NextRace()
       {
          Track newTrack = Data.Competition.NextTrack();
          if (newTrack != null)
@@ -143,7 +143,7 @@ namespace Controller
             CurrentRace = null;
             Console.WriteLine("No more races");
          }
-         return CurrentRace;
+         CurrentRace.Start();
 
       } 
       #endregion
