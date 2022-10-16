@@ -11,6 +11,11 @@ namespace Model
    public class Track
    {
       #region Properties
+      private int myVar;
+      private int _rounds { get; set; }
+      public int Rounds {
+         get { return _rounds;  } private set{_rounds = value;} 
+      }
       public string Name { get; set; }
       public LinkedList<Section> Sections { get; set; }
       public Section FirstSection { get; set; }
@@ -18,7 +23,7 @@ namespace Model
       #endregion
 
       #region Constructors
-      public Track(string name, SectionTypes[] sections)
+      public Track(string name, int rounds, SectionTypes[] sections)
       {
          if (sections[0] != SectionTypes.StartGrid) throw new ArgumentException($"First section should be a start grid, review track {name}");
          if (sections[1] != SectionTypes.StartGrid) throw new ArgumentException($"Second section should be a start grid, review track {name}");
@@ -51,6 +56,7 @@ namespace Model
 
          Name = name;
          Sections = ConvertSectionsArrayToList(sections);
+         Rounds = rounds;
       }  
       
       public Track(string name)
