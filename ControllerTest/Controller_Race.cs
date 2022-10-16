@@ -81,7 +81,7 @@ namespace ControllerTest
             Participants = new List<IParticipant>();
             Participants.Add(new Driver("Lola", TeamColors.Blue));
             Participants.Add(new Driver("Thijmen", TeamColors.Yellow));
-            Participants.Add(new Driver("Joost", TeamColors.Turqoise));
+            Participants.Add(new Driver("Joost", TeamColors.Purple));
             Participants.Add(new Driver("Tom", TeamColors.White));
             Participants.Add(new Driver("Tom", TeamColors.Red));
             _testRace = new Race(track, Participants);

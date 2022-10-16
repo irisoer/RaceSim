@@ -14,7 +14,7 @@ namespace Model
       Blue,
       Yellow,
       White,
-      Turqoise,
+      Purple,
 
    } 
    #endregion

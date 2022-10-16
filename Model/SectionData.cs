@@ -34,5 +34,47 @@ namespace Model
             throw new Exception("There is no participant!");
          }
       }
+
+
+      public void AddParticipantToSection(IParticipant participant, int newPosition)
+      {
+         if (Left is null)
+         {
+            Left = participant;
+            DistanceLeft += newPosition;
+         }
+         else if (Right is null)
+         {
+            Right = participant;
+            DistanceRight += newPosition;
+         }
+      }
+
+      public void MoveParticipantOnSection(IParticipant participant, int distance)
+      {
+         if (participant == Left)
+         {
+            DistanceLeft += distance;
+         }
+         else if (participant == Right)
+         {
+            DistanceRight += distance;
+         }
+      }
+
+      public void RemoveParticipantFromSection(IParticipant participant)
+      {
+         if (participant == Left) //remove driver from last section
+         {
+            Left = null;
+            DistanceLeft = 0;
+         }
+         else if (participant == Right)
+         {
+            Right = null;
+            DistanceRight = 0;
+         }
+      }
+
    }
 }

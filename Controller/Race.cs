@@ -108,7 +108,7 @@ namespace Controller
                data.Right = tempParticipants[randParticipantNumber];
                tempParticipants[randParticipantNumber].CurrentSection = section;
                tempParticipants.Remove(data.Right);
-            }
+            }                  
          }
       }
 
@@ -122,7 +122,6 @@ namespace Controller
             SectionData sectiondata = GetSectionData(currentSection.ValueRef);
             int newPosition = distance + sectiondata.GetParticipantPosition(participant);
             bool next = newPosition >= Section.SectionLength;
-
             if (next)
             {
                participant.CurrentSection = currentSection.Next ?? currentSection.List.First;
@@ -139,7 +138,7 @@ namespace Controller
                   sectiondata.DistanceRight = 0;
                }
 
-               sectiondata = GetSectionData(participant.CurrentSection.ValueRef); //get new sectiondata
+
                if (sectiondata.IsFull())
                {
                   participant.CurrentSection = participant.CurrentSection.Next;
@@ -155,7 +154,7 @@ namespace Controller
                   sectiondata.Right = participant;
                   sectiondata.DistanceRight += newPosition;
                }
-            }
+
             else
             {
                if (participant == sectiondata.Left)
@@ -167,10 +166,35 @@ namespace Controller
                   sectiondata.DistanceRight += distance;
                }
             }
-         }
+                     sectiondata.Left = participant;
          DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
       }
+      public void ClearEvents()
+               foreach (var var in DriversChanged.GetInvocationList())
+               {
+                  DriversChanged -= (EventHandler<DriversChangedEventArgs>)var;
+               }
+            }
+            if (RaceChanged.GetInvocationList() != null)
+            {
+               foreach (var var in RaceChanged.GetInvocationList())
+               {
+                  RaceChanged -= (RaceChangedDelegate)var;
+               }
+            }
+         }
+         catch (NullReferenceException)
+         {
+            return;
+         }
+         
+      }
 
+      public void End()
+      {
+         _timer.Stop();
+         RaceChanged?.Invoke(this, Data.CurrentRace);
+      }
 
       #endregion
    }
