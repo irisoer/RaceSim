@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controller", "Controller\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{DAC8F365-6504-4180-B980-A2ABFABDD270}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfRaceSim", "WpfRaceSim\WpfRaceSim.csproj", "{CDF91665-A649-4098-B568-4147DFC3D4A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfRaceSim", "WpfRaceSim\WpfRaceSim.csproj", "{CDF91665-A649-4098-B568-4147DFC3D4A5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{01EA0FA5-A0E0-4132-97F6-42AC5A0C447C} = {01EA0FA5-A0E0-4132-97F6-42AC5A0C447C}
+		{5EC2BEB6-BFFB-4C69-A8E4-EC0DB73437B6} = {5EC2BEB6-BFFB-4C69-A8E4-EC0DB73437B6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
