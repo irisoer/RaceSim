@@ -21,7 +21,7 @@ namespace RaceSim
    {
       public static Direction _direction { get; set; } 
       public static Direction _newDirection { get; set; }
-      public static Race _currentRace { get; set; }
+      //public static Race _currentRace { get; set; }
       public static SectionTypes _lastSection { get; set; }
       public static int XPos = 40; 
       public static int YPos = 2;
@@ -110,8 +110,8 @@ namespace RaceSim
          Console.CursorVisible = false;
          Console.CursorLeft = 30;
          Console.CursorTop = 1;
-         Console.WindowHeight = Console.LargestWindowHeight;
-         Console.WindowWidth = Console.LargestWindowWidth;
+         //Console.WindowHeight = Console.LargestWindowHeight;
+         //Console.WindowWidth = Console.LargestWindowWidth;
 
          Console.WriteLine($"The next Track in this competition is: {t.Name}");
          foreach (Section section in t.Sections)
@@ -154,25 +154,20 @@ namespace RaceSim
                   if (_direction == Direction.East)
                   {
                       DrawSection(_cornerDownLeft, section);
-                    
-                     _direction = Direction.North;
                   }
                   else if (_direction == Direction.North)
                   {
                      DrawSection(_cornerRightDown, section);
-                     
-                     _direction = Direction.West;
                   }
                   else if (_direction == Direction.West)
                   {
                      DrawSection(_cornerRightUp, section);
-                     _direction = Direction.South;
                   }
                   else //south
                   {
                      DrawSection(_cornerLeftUp, section);
-                     _direction = Direction.East;
                   }
+                  CalculateDirection(SectionTypes.LeftCorner);
                   break;
                #endregion
                #region RightCorner
@@ -181,27 +176,20 @@ namespace RaceSim
                   if (_direction == Direction.East)
                   {
                      DrawSection(_cornerRightDown, section);
-                     _direction = Direction.South;
-                     
                   }
                   else if (_direction == Direction.West)
                   {
                      DrawSection(_cornerLeftUp, section);
-                     _direction = Direction.North;
-                     
                   }
                   else if (_direction == Direction.North)
                   {
                      DrawSection(_cornerRightUp, section);
-                     _direction = Direction.East;
-                     
                   }
                   else if (_direction == Direction.South)
                   {
                      DrawSection(_cornerDownLeft, section);
-                     _direction = Direction.West;
-                    
                   }
+                  CalculateDirection(SectionTypes.RightCorner);
                   break;
                #endregion
                #region Finish
@@ -253,16 +241,11 @@ namespace RaceSim
             }
             if (_direction == Direction.North)
             {
-               
                   YPos = YPos - 4;
-               
             }
             if (_direction == Direction.South)
             {
-               
                YPos = YPos + 4;
-           
-
             }
       }
 
@@ -300,6 +283,23 @@ namespace RaceSim
          newRace.DriversChanged += DriversChangedEventHandlerMethod;
          previousRace.RaceChanged -= RaceChangedDelegateMethod;
          newRace.RaceChanged += RaceChangedDelegateMethod;
+      }
+
+      private static void CalculateDirection(SectionTypes sectionType)
+      {
+         switch (sectionType)
+         {
+            case SectionTypes.LeftCorner:
+               if (_direction == Direction.East) { _direction = Direction.North; break; }
+               if (_direction == Direction.North) { _direction = Direction.West; break; }
+               if (_direction == Direction.West) { _direction = Direction.South; break; }
+               else { _direction = Direction.East; break; }
+            case SectionTypes.RightCorner:
+               if (_direction == Direction.East) { _direction = Direction.South; break; }
+               if (_direction == Direction.North) { _direction = Direction.East; break; }
+               if (_direction == Direction.West) { _direction = Direction.North; break; }
+               else { _direction = Direction.West; break; }
+         }
       }
 
 

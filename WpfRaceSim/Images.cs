@@ -12,33 +12,39 @@ namespace WpfRaceSim
 {
    static class Images
    {
-      private static Dictionary<string, Bitmap> _imageDictionary { get; set; }
+      private static Dictionary<string, Bitmap> _imageDictionary = new Dictionary<string, Bitmap>();
 
       public static Bitmap GetImageOutOfFolder(string url)
       {
-         if (_imageDictionary[url] == null)
+         if (_imageDictionary.ContainsKey(url))
          {
+            return _imageDictionary[url];
+         }
+         else { 
             Bitmap bitmap = new Bitmap(url);
             _imageDictionary.Add(url, bitmap);
-            return bitmap;
+            return bitmap; 
          }
-         else return _imageDictionary[url];
       }
 
       public static void ClearImageDictionary()
       {
-         _imageDictionary.Clear();
+         _imageDictionary?.Clear();
       }
 
       public static Bitmap CreateBitmap(int x, int y)
       {
+         Bitmap returnBitmap;
          string key = "empty";
-         if (!_imageDictionary.ContainsKey(key))
+         if (_imageDictionary.ContainsKey(key))
          {
-            _imageDictionary.Add(key, new Bitmap(x, y));
-            Graphics g = Graphics.FromImage(_imageDictionary[key]);
-            g.FillRectangle(new SolidBrush(System.Drawing.Color.AliceBlue), 0, 0, x, y);
+            return (Bitmap)GetImageOutOfFolder(key).Clone();
          }
+         returnBitmap = new Bitmap(x, y);
+         Graphics g = Graphics.FromImage(returnBitmap);
+         SolidBrush solidbrush = new SolidBrush(System.Drawing.Color.AliceBlue);
+         g.FillRectangle(solidbrush, 0, 0, x, y);
+         _imageDictionary.Add(key, returnBitmap);
          return (Bitmap)_imageDictionary[key].Clone();
       }
 

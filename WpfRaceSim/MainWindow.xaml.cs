@@ -26,21 +26,36 @@ namespace WpfRaceSim
       public MainWindow()
       {
          Data.Initialize();
-         Data.CurrentRace.DriversChanged += OnDriversChanged;
-
+         Data.CurrentRace.DriversChanged += OnDriversChangedEventHandlerMethod;
+         Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
+         
          InitializeComponent();
          
       }
 
-      public void OnDriversChanged(object sender, DriversChangedEventArgs e)
+      public void OnDriversChangedEventHandlerMethod(object? sender, DriversChangedEventArgs e)
       {
-         this.TrackImage.Dispatcher.BeginInvoke(
+         TrackImage.Dispatcher.BeginInvoke(
          DispatcherPriority.Render,
          new Action(() =>
          {
-            this.TrackImage.Source = null;
-            this.TrackImage.Source = WPFVisualisation.DrawTrack(e.Track);
+            TrackImage.Source = null;
+            TrackImage.Source = WPFVisualisation.DrawTrack(e.Track);
          }));
+      }
+
+      public void RaceChangedDelegateMethod(Race previousRace, Race nextRace)
+      {
+         previousRace.DriversChanged -= OnDriversChangedEventHandlerMethod;
+         nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
+         previousRace.RaceChanged -= RaceChangedDelegateMethod;
+         nextRace.RaceChanged += RaceChangedDelegateMethod;
+         Images.ClearImageDictionary();
+         Data.NextRace();
+         if(Data.CurrentRace != null)
+         {
+            Data.CurrentRace.Start();
+         }
 
       }
    }
