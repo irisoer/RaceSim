@@ -15,83 +15,57 @@ namespace WpfRaceSim
    {
 
       #region Graphics
-      private const string _start = "Media/start.png";
-      private const string _straight = "Media/straight.png";
-      private const string _finish = "Media/finish.png";
-      private const string _cornerRight = "Media/cornerRight.png";
-      private const string _cornerLeft = "Media/cornerLeft.png";
-      private const string _carBlue = "Media/carBlue.png";
-      private const string _carBlueBroken = "Media/carBlueBroken.png";
-      private const string _carOrange = "Media/carOrange.png";
-      private const string _carOrangeBroken = "Media/carOrangeBroken.png";
-      private const string _carPurple = "Media/carPurple.png";
-      private const string _carPurpleBroken = "Media/carPurpleBroken.png";
-      private const string _carRed = "Media/carRed.png";
-      private const string _carRedBroken = "Media/carRedBroken.png";
-      private const string _carWhite = "Media/carWhite.png";
-      private const string _carWhiteBroken = "Media/carWhiteBroken.png";
-      private const string _carYellow = "Media/carYellow.png";
-      private const string _carYellowBroken = "Media/carYellowBroken.png";
+      private const string _start = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\start.png";
+      private const string _straight = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\straight.png";
+      private const string _finish = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\finish.png";
+      private const string _cornerRight = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\cornerRight.png";
+      private const string _cornerLeft = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\cornerLeft.png";
+      private const string _carBlue = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carBlue.png";
+      private const string _carBlueBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carBlueBroken.png";
+      private const string _carOrange = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carOrange.png";
+      private const string _carOrangeBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carOrangeBroken.png";
+      private const string _carPurple = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carPurple.png";
+      private const string _carPurpleBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carPurpleBroken.png";
+      private const string _carRed = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carRed.png";
+      private const string _carRedBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carRedBroken.png";
+      private const string _carWhite = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carWhite.png";
+      private const string _carWhiteBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carWhiteBroken.png";
+      private const string _carYellow = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carYellow.png";
+      private const string _carYellowBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carYellowBroken.png";
       #endregion
 
       private enum Direction
       {
          North, East, South, West
       }
-      private const int _size = 100;
+      private const int _size = 128;
       private static int _xpos;
       private static int _ypos; 
-      private static int _width;
-      private static int _height;
+
 
       private static Direction _direction { get; set; }
 
 
       public static BitmapSource DrawTrack(Track track)
       {
-         PreDrawTrack(track);
-         Bitmap emptyImage = Images.CreateBitmap((_width * _size), (_height * _size));
+
+         Bitmap emptyImage = Images.CreateBitmap(1920, 1080);
+
+         _xpos = (7 * _size);
+         _ypos = 20;
+
          Bitmap trackImage = PlaceSections(track, emptyImage);
+         return Images.CreateBitmapSourceFromGdiBitmap(trackImage);
         
-         return Images.CreateBitmapSourceFromGdiBitmap(Images.CreateBitmap(300,300));
+         //return Images.CreateBitmapSourceFromGdiBitmap(Images.CreateBitmap(1920,1080));
       }
-
-      public static void PreDrawTrack(Track t)
-      {
-         int x = 0;
-         int y = 0;
-         int i = 0;
-         int j = 0;
-         _direction = Direction.East;
-         foreach(Section section in t.Sections)
-         {
-            if(section.SectionType == SectionTypes.LeftCorner)
-            {
-               CalculateDirection(section.SectionType);
-            }
-            else if(section.SectionType == SectionTypes.RightCorner)
-            {
-               CalculateDirection(section.SectionType);
-            }
-
-            CalculateDrawPosition(_direction, x, y);
-            if (j < y) { j = y; }
-            else if (_ypos > y) { _ypos = y; }
-            if (i < x) { i = x; }
-            else if (_xpos > x) { _xpos = x; }
-         }
-         _direction = Direction.East;
-         _width = i - _xpos + 1;
-         _height = j - _ypos + 1;
-      }
-
 
       public static Bitmap PlaceSections(Track t, Bitmap bitmap)
       {
          int x = _xpos;
          int y = _ypos;
          Graphics graphics = Graphics.FromImage(bitmap);
-         foreach(Section section in t.Sections)
+         foreach (Section section in t.Sections)
          {
             switch (section.SectionType)
             {
@@ -113,8 +87,23 @@ namespace WpfRaceSim
                   CalculateDirection(SectionTypes.RightCorner);
                   break;
             }
-
-            CalculateDrawPosition(_direction, -_xpos, -_ypos);
+            switch (_direction)
+            {
+               case Direction.North:
+                  y = y - _size;
+                  break;
+               case Direction.East:
+                  x = x + _size;
+                  _xpos = x;
+                  break;
+               case Direction.South:
+                  y = y + _size;
+                  break;
+               case Direction.West:
+                  x = x - _size;
+                  _xpos = x;
+                  break;
+            }
          }
          _direction = Direction.East;
          return bitmap;
@@ -126,19 +115,19 @@ namespace WpfRaceSim
          switch (r)
          {
             case Direction.North:
-               g.DrawImage(bitm, new Point(x * _size, y * _size));
+               bitm.RotateFlip(RotateFlipType.Rotate270FlipNone);
+               g.DrawImage(bitm, new Point(x, y));
                break;
             case Direction.East:
-               bitm.RotateFlip(RotateFlipType.Rotate90FlipNone);
-               g.DrawImage(bitm, new Point(x * _size, y * _size));
+               g.DrawImage(bitm, new Point(x, y));
                break;
             case Direction.South:
-               bitm.RotateFlip(RotateFlipType.Rotate180FlipNone);
-               g.DrawImage(bitm, new Point(x * _size, y * _size));
+               bitm.RotateFlip(RotateFlipType.Rotate90FlipNone);
+               g.DrawImage(bitm, new Point(x, y));
                break;
             case Direction.West:
-               bitm.RotateFlip(RotateFlipType.Rotate270FlipNone);
-               g.DrawImage(bitm, new Point(x * _size, y * _size));
+               bitm.RotateFlip(RotateFlipType.Rotate180FlipNone);
+               g.DrawImage(bitm, new Point(x, y));
                break;
          }
       }
@@ -159,25 +148,5 @@ namespace WpfRaceSim
                else { _direction = Direction.West; break; }
          }
       }
-
-      private static void CalculateDrawPosition(Direction direction, int x, int y)
-      {
-         switch (direction)
-         {
-            case Direction.North:
-               y--;
-               break;
-            case Direction.East:
-               x++;
-               break;
-            case Direction.South:
-               y++;
-               break;
-            case Direction.West:
-               x--;
-               break;
-         }
-      }
-
    }
 }

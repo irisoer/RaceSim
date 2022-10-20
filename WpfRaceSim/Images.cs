@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -23,7 +24,7 @@ namespace WpfRaceSim
          else { 
             Bitmap bitmap = new Bitmap(url);
             _imageDictionary.Add(url, bitmap);
-            return bitmap; 
+            return (Bitmap)bitmap.Clone(); 
          }
       }
 
