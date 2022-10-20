@@ -25,12 +25,17 @@ namespace WpfRaceSim
    {
       public MainWindow()
       {
+         MainWindowInitialize();
+      }
+
+      public void MainWindowInitialize()
+      {
          Data.Initialize();
          Data.CurrentRace.DriversChanged += OnDriversChangedEventHandlerMethod;
          Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
-         
+
+
          InitializeComponent();
-         
       }
 
       public void OnDriversChangedEventHandlerMethod(object? sender, DriversChangedEventArgs e)
@@ -47,16 +52,15 @@ namespace WpfRaceSim
       public void RaceChangedDelegateMethod(Race previousRace, Race nextRace)
       {
          previousRace.DriversChanged -= OnDriversChangedEventHandlerMethod;
-         nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
          previousRace.RaceChanged -= RaceChangedDelegateMethod;
-         nextRace.RaceChanged += RaceChangedDelegateMethod;
          Images.ClearImageDictionary();
          Data.NextRace();
-         if(Data.CurrentRace != null)
+         if (Data.CurrentRace != null)
          {
+            nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
+            nextRace.RaceChanged += RaceChangedDelegateMethod;
             Data.CurrentRace.Start();
          }
-
       }
    }
 }

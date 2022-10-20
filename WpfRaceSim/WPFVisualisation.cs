@@ -1,4 +1,5 @@
 ﻿using Model;
+using Controller;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,7 +41,9 @@ namespace WpfRaceSim
       }
       private const int _size = 128;
       private static int _xpos;
-      private static int _ypos; 
+      private static int _ypos;
+      private static int posLeft;
+      private static int posRight;  
 
 
       private static Direction _direction { get; set; }
@@ -53,8 +56,11 @@ namespace WpfRaceSim
 
          _xpos = (7 * _size);
          _ypos = 20;
+         posLeft = _xpos + 50;
+         posRight = _xpos + 100;
 
          Bitmap trackImage = PlaceSections(track, emptyImage);
+         //Bitmap participantImage = DrawDriverOnTrack(track, trackImage);
          return Images.CreateBitmapSourceFromGdiBitmap(trackImage);
         
          //return Images.CreateBitmapSourceFromGdiBitmap(Images.CreateBitmap(1920,1080));
@@ -64,26 +70,72 @@ namespace WpfRaceSim
       {
          int x = _xpos;
          int y = _ypos;
+         
          Graphics graphics = Graphics.FromImage(bitmap);
          foreach (Section section in t.Sections)
          {
-            switch (section.SectionType)
+            SectionData sd = Data.CurrentRace.GetSectionData(section);
+            //if (sd.Left != null) { IParticipant pLeft = sd.Left; }
+            //if (sd.Right != null) { IParticipant pRight = sd.Right; }
+
+
+            switch (section.SectionType) //switchcase which section to draw
             {
                case SectionTypes.StartGrid:
-                  DrawSection(graphics, Images.GetImageOutOfFolder(_start), x, y, _direction);
+                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_start), x, y, _direction);
+                  if (sd.Left is not null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Left)), x, y + 10, _direction);
+                  }
+                  else if (sd.Right is not null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Right)), x + 10, y + 40, _direction);
+                  }
                   break;
                case SectionTypes.Straight:
-                  DrawSection(graphics, Images.GetImageOutOfFolder(_straight), x, y, _direction);
+                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_straight), x, y, _direction);
+                  if (sd.Left is not null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Left)), x, y + 10, _direction);
+                  }
+                  else if (sd.Right is not null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Right)), x + 10, y + 40, _direction);
+                  }
                   break;
                case SectionTypes.Finish:
-                  DrawSection(graphics, Images.GetImageOutOfFolder(_finish), x, y, _direction);
+                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_finish), x, y, _direction);
+                  if (sd.Left != null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Left)), x, y + 10, _direction);
+                  }
+                  else if (sd.Right != null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Right)), x + 10, y + 40, _direction);
+                  }
                   break;
                case SectionTypes.LeftCorner:
-                  DrawSection(graphics, Images.GetImageOutOfFolder(_cornerLeft), x, y, _direction);
+                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_cornerLeft), x, y, _direction);
+                  if (sd.Left != null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Left)), x, y + 10, _direction);
+                  }
+                  else if (sd.Right != null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Right)), x + 10, y + 40, _direction);
+                  }
                   CalculateDirection(SectionTypes.LeftCorner);
                   break;
                case SectionTypes.RightCorner:
-                  DrawSection(graphics, Images.GetImageOutOfFolder(_cornerRight), x, y, _direction);
+                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_cornerRight), x, y, _direction);
+                  if (sd.Left != null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Left)), x, y + 10, _direction);
+                  }
+                  else if (sd.Right != null)
+                  {
+                     DrawDefaults(graphics, Images.GetImageOutOfFolder(GetDriverImage(sd.Right)), x + 10, y + 40, _direction);
+                  }
                   CalculateDirection(SectionTypes.RightCorner);
                   break;
             }
@@ -103,13 +155,48 @@ namespace WpfRaceSim
                   x = x - _size;
                   _xpos = x;
                   break;
+            } // calculate xpos ypos
+            if(Data.CurrentRace.EndActivated == true)
+            {
+
             }
          }
          _direction = Direction.East;
          return bitmap;
       }
 
-      private static void DrawSection(Graphics g, Bitmap bitmap, int x, int y, Direction r)                                                                 
+
+
+
+      //private static Bitmap DrawDriverOnTrack(Track track, Bitmap bitmap)
+      //{
+      //   Graphics graphics = Graphics.FromImage(bitmap);
+      //   Bitmap bitmapDrivers = new Bitmap(bitmap);
+         
+      //}
+
+      private static string GetDriverImage(IParticipant driver)
+      {
+            switch (driver.TeamColor)
+            {
+               case TeamColors.Purple:
+                  if (driver.Equipment.IsBroken == false) { return _carPurple; } else { return _carPurpleBroken; }
+               case TeamColors.Red:
+                  if (driver.Equipment.IsBroken == false) { return _carRed; } else { return _carRedBroken; }
+               case TeamColors.Orange:
+                  if (driver.Equipment.IsBroken == false) { return _carOrange; } else { return _carOrangeBroken; }
+               case TeamColors.Blue:
+                  if(driver.Equipment.IsBroken == false) { return _carBlue; } else { return _carBlueBroken; }
+               case TeamColors.White:
+                  if(driver.Equipment.IsBroken == false) { return _carWhite; } else { return _carWhiteBroken; }
+               case TeamColors.Yellow:
+                  if(driver.Equipment.IsBroken == false) { return _carYellow; } else { return _carYellowBroken; }
+               default:
+               return "";
+            } 
+      }
+
+      private static void DrawDefaults(Graphics g, Bitmap bitmap, int x, int y, Direction r)
       {
          Bitmap bitm = new Bitmap(bitmap);
          switch (r)

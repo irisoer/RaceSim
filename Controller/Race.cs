@@ -22,6 +22,7 @@ namespace Controller
       private Dictionary<IParticipant, string> _oldName { get; set; }
       private int _rounds { get; set; }
       public Timer _timer { get; set; }
+      public bool EndActivated = false; 
 
       public int FinishedDrivers
       {
@@ -198,6 +199,7 @@ namespace Controller
          if (_finishedDrivers == Participants.Count)
          {
             End();
+            EndActivated = true; 
             return;
          }
       }
@@ -244,6 +246,7 @@ namespace Controller
          Thread.Sleep(500);
          Data.NextRace();
          RaceChanged?.Invoke(this, Data.CurrentRace);
+         EndActivated = false; 
       }
 
       #endregion
