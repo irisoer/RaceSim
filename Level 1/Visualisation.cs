@@ -279,6 +279,7 @@ namespace RaceSim
 
       public static void RaceChangedDelegateMethod(Race previousRace, Race newRace)
       {
+         Console.Clear();
          previousRace.DriversChanged -= DriversChangedEventHandlerMethod;
          newRace.DriversChanged += DriversChangedEventHandlerMethod;
          previousRace.RaceChanged -= RaceChangedDelegateMethod;

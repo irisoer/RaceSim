@@ -22,7 +22,6 @@ namespace Controller
       private Dictionary<IParticipant, string> _oldName { get; set; }
       private int _rounds { get; set; }
       public Timer _timer { get; set; }
-      public bool EndActivated = false; 
 
       public int FinishedDrivers
       {
@@ -199,7 +198,6 @@ namespace Controller
          if (_finishedDrivers == Participants.Count)
          {
             End();
-            EndActivated = true; 
             return;
          }
       }
@@ -234,7 +232,7 @@ namespace Controller
       public void End()
       {
          _timer.Stop();
-         Console.Clear();
+         //Console.Clear();
          while(FinishedDrivers > 0)
          {
             foreach(IParticipant participant in Participants)
@@ -245,8 +243,7 @@ namespace Controller
          }
          Thread.Sleep(500);
          Data.NextRace();
-         RaceChanged?.Invoke(this, Data.CurrentRace);
-         EndActivated = false; 
+         RaceChanged?.Invoke(this, Data.CurrentRace); 
       }
 
       #endregion

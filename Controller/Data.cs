@@ -142,6 +142,7 @@ namespace Controller
          {
             CurrentRace = null;
             Console.WriteLine("No more races");
+
          }
          CurrentRace.Start();
 

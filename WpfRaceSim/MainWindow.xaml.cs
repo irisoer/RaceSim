@@ -51,16 +51,11 @@ namespace WpfRaceSim
 
       public void RaceChangedDelegateMethod(Race previousRace, Race nextRace)
       {
+         Images.ClearImageDictionary();
          previousRace.DriversChanged -= OnDriversChangedEventHandlerMethod;
          previousRace.RaceChanged -= RaceChangedDelegateMethod;
-         Images.ClearImageDictionary();
-         Data.NextRace();
-         if (Data.CurrentRace != null)
-         {
-            nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
-            nextRace.RaceChanged += RaceChangedDelegateMethod;
-            Data.CurrentRace.Start();
-         }
+         nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
+         nextRace.RaceChanged += RaceChangedDelegateMethod;
       }
    }
 }
