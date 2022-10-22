@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfRaceSim.MainWindow"
+﻿<Window x:Name="Main_Window" x:Class="WpfRaceSim.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920">
     <Grid Background="#FF63A29A">
-        <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="854" VerticalAlignment="Top" Width="1754" Margin="79,117,0,0"/>
+        <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="984" VerticalAlignment="Top" Width="1750" Margin="80,42,0,0"/>
+        <DockPanel LastChildFill="False">
+            <Menu DockPanel.Dock="Top" Height="20" Width="75">
+                <MenuItem x:Name="Menu" HeaderStringFormat="Menu" Header="Menu" FontSize="16" Width="72" HorizontalAlignment="Center" Click="Menu_Click">
+                    <MenuItem x:Name="Current_Race" Click="MenuItem_Open_CurrentRaceScreen" Header="Current Race"/>
+                    <MenuItem x:Name="Current_Competition" Click="MenuItem_Open_CurrentCompetitionScreen" Header="Current Competition"/>
+                    <MenuItem x:Name="CloseApplication" Header="Close Application" Click="MenuItem_Exit_Click"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
     </Grid>
 </Window>
