@@ -35,9 +35,7 @@ namespace WpfRaceSim
          Data.Initialize();
          Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
          Data.CurrentRace.DriversChanged += OnDriversChangedEventHandlerMethod;
-         
-
-
+        
          InitializeComponent();
       }
 
