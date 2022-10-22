@@ -145,15 +145,6 @@ namespace Controller
             int newPosition = distance + sectiondata.GetParticipantPosition(participant);
             bool next = newPosition >= Section.SectionLength;
 
-            //if (participant.Rounds == _rounds && participant.CurrentSection.Value.SectionType != SectionTypes.Finish)
-            //{
-            //   sectiondata.RemoveParticipantFromSection(participant);
-            //}
-            //if(participant.Rounds == _rounds)
-            //{
-            //   continue;
-            //}
-
             if (next)
             {
                participant.CurrentSection = currentSection.Next ?? currentSection.List.First;
@@ -163,12 +154,6 @@ namespace Controller
                   {
                      participant.Rounds++;
                   }
-                  //if (participant.Rounds == _rounds)
-                  //{
-                  //   FinishedDrivers++;
-                  //   sectiondata.RemoveParticipantFromSection(participant);
-                  //   continue;
-                  //}
                }
                newPosition -= Section.SectionLength;
                sectiondata.RemoveParticipantFromSection(participant);

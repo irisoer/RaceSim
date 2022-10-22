@@ -23,6 +23,10 @@ namespace Controller
       {
          Competition = new Competition();
          AddParticipants();
+         foreach (var participant in Competition.Participants)
+         {
+            Competition.CompetitionStats.Add(participant, 0);
+         }
          AddTracks();
          if (Competition.Tracks.Count < 2) //check if there are at least 2 tracks in competition
          {
@@ -133,7 +137,7 @@ namespace Controller
 
       public static void NextRace()
       {
-         //Competition.CompetitionStats = CurrentRace.RaceStats;
+         
          Track newTrack = Data.Competition.NextTrack();
          if (newTrack != null)
          {
@@ -145,6 +149,7 @@ namespace Controller
             Console.WriteLine("No more races");
 
          }
+         EditCompetitionStats();
          CurrentRace.Start();
 
       } 
@@ -154,7 +159,7 @@ namespace Controller
       {
          foreach(var participant in Competition.Participants)
          {
-
+            Competition.CompetitionStats[participant] = CurrentRace.RaceStats[participant];
          }
       }
 
