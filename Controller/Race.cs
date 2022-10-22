@@ -41,6 +41,8 @@ namespace Controller
       {
          Track = track;
          Participants = participants;
+         RaceStats = new Dictionary<IParticipant, int>();
+         _finishedDrivers = new Queue<IParticipant>();   
          _positions = new Dictionary<Section, SectionData>();
          _timer = new Timer(250);
          _timer.Elapsed += OnTimedEvent;
@@ -91,6 +93,7 @@ namespace Controller
          }
          foreach(IParticipant participant in participants) //check if teamcolor is unique
          {
+            RaceStats.Add(participant, 0);
             participant.IsFinished = false;
             foreach (IParticipant obj in participants) {
                if (participant.TeamColor.Equals(obj.TeamColor) && participant != obj)
@@ -133,9 +136,8 @@ namespace Controller
          _timer.Stop();
          foreach (IParticipant participant in Participants)
          {
-            if (participant.Rounds == _rounds && participant.IsFinished == true) continue;
+            if (participant.IsFinished == true) continue;
             EquipmentBroke();
-            
 
             int distance = (participant.Equipment.Speed * participant.Equipment.Performance);
             LinkedListNode<Section> currentSection = participant.CurrentSection;
@@ -161,7 +163,6 @@ namespace Controller
                   {
                      participant.Rounds++;
                   }
-                  else continue;
                   //if (participant.Rounds == _rounds)
                   //{
                   //   FinishedDrivers++;
@@ -182,26 +183,25 @@ namespace Controller
                      {
                         participant.Rounds++;
                      }
-                     else continue;
                   }
                   sectiondata = GetSectionData(participant.CurrentSection.ValueRef);
                }
                sectiondata.AddParticipantToSection(participant, newPosition);
-
             }
-               else
+            else
                {
-                  if (participant.Rounds != _rounds || (participant.Rounds == _rounds && participant.CurrentSection.Value.SectionType == SectionTypes.Finish)) //check if driver finished & over finish
+
+               if (participant.Rounds != _rounds || (participant.Rounds == _rounds && participant.CurrentSection.Value.SectionType == SectionTypes.Finish)) //check if driver not finished & over finish
                   {
-                     sectiondata.MoveParticipantOnSection(participant, distance);
+                  sectiondata.MoveParticipantOnSection(participant, distance);
                   }
-            }
+            }               
             if (participant.Rounds == _rounds && participant.CurrentSection.Value.SectionType != SectionTypes.Finish) //if driver finished and over finish
-            {
-               participant.IsFinished = true;
-               _finishedDrivers.Enqueue(participant);
-               sectiondata.RemoveParticipantFromSection(participant);
-            }
+               {
+                  _finishedDrivers.Enqueue(participant);
+                  sectiondata.RemoveParticipantFromSection(participant);
+                  participant.IsFinished = true;
+               }
             DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
             EquipmentRepair();
             _timer.Start();
@@ -249,7 +249,7 @@ namespace Controller
             IParticipant participant = _finishedDrivers.Dequeue();
             participant.Points = PointsToGive;
             PointsToGive = PointsToGive / 2;
-            RaceStats.Add(participant, participant.Points);
+            RaceStats[participant] = participant.Points;
          }
          Thread.Sleep(500);
          Data.NextRace();

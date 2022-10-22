@@ -6,12 +6,9 @@
         xmlns:local="clr-namespace:WpfRaceSim"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920">
-    <Window.DataContext>
-        <local:DataContext/>
-    </Window.DataContext>
     <Grid Background="#FF63A29A">
         <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="984" VerticalAlignment="Top" Width="1750" Margin="80,42,0,0"/>
-        <Label Content="{Binding TrackName, Mode=OneWay}" FontSize="16" FontWeight="Bold" Height="1002" VerticalAlignment="Top" Margin="821,0,815,0"/>
+        <Label FontSize="16" FontWeight="Bold" Height="1002" VerticalAlignment="Top" Margin="821,0,815,0" Content="label"/>
         <DockPanel LastChildFill="False">
             <Menu DockPanel.Dock="Top" Height="20" Width="54.84">
                 <MenuItem x:Name="Menu" HeaderStringFormat="Menu" Header="Menu" FontSize="16" HorizontalAlignment="Center" Click="Menu_Click">

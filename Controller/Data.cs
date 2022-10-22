@@ -133,7 +133,7 @@ namespace Controller
 
       public static void NextRace()
       {
-         Competition.CompetitionStats = CurrentRace.RaceStats;
+         //Competition.CompetitionStats = CurrentRace.RaceStats;
          Track newTrack = Data.Competition.NextTrack();
          if (newTrack != null)
          {
@@ -148,6 +148,16 @@ namespace Controller
          CurrentRace.Start();
 
       } 
+
+
+      public static void EditCompetitionStats()
+      {
+         foreach(var participant in Competition.Participants)
+         {
+
+         }
+      }
+
       #endregion
 
 
