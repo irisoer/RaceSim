@@ -14,6 +14,9 @@ namespace WpfRaceSim
    {
       public event PropertyChangedEventHandler? PropertyChanged;
       public string TrackName => Data.CurrentRace.Track.Name;
+      public List<string> RaceStats => Data.CurrentRace.RaceStats.Select(x => $"{x.Key.Name} » Points: {x.Value}").ToList();
+
+      public List<string> RoundCount => Data.CurrentRace.Participants.Select(x => $"{x.Name} round {x.Rounds}/{Data.CurrentRace.Track.Rounds}").ToList();
 
       public DataContext()
       {
@@ -29,7 +32,6 @@ namespace WpfRaceSim
       public void RaceChangedEventMethod(Race previousRace, Race nextRace)
       {
          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
-         System.Diagnostics.Debug.WriteLine(TrackName);
       }
    }
 }
