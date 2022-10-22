@@ -24,6 +24,7 @@ namespace Model
       public IEquipment Equipment { get; set; }
       public TeamColors TeamColor { get; set; }
       public LinkedListNode<Section> CurrentSection { get; set; }
+      public bool IsFinished { get; set; }
 
       #endregion
    }

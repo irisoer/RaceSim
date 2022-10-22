@@ -6,16 +6,21 @@
         xmlns:local="clr-namespace:WpfRaceSim"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920">
+    <Window.DataContext>
+        <local:DataContext/>
+    </Window.DataContext>
     <Grid Background="#FF63A29A">
         <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="984" VerticalAlignment="Top" Width="1750" Margin="80,42,0,0"/>
+        <Label Content="{Binding TrackName, Mode=OneWay}" FontSize="16" FontWeight="Bold" Height="1002" VerticalAlignment="Top" Margin="821,0,815,0"/>
         <DockPanel LastChildFill="False">
-            <Menu DockPanel.Dock="Top" Height="20" Width="75">
-                <MenuItem x:Name="Menu" HeaderStringFormat="Menu" Header="Menu" FontSize="16" Width="72" HorizontalAlignment="Center" Click="Menu_Click">
+            <Menu DockPanel.Dock="Top" Height="20" Width="54.84">
+                <MenuItem x:Name="Menu" HeaderStringFormat="Menu" Header="Menu" FontSize="16" HorizontalAlignment="Center" Click="Menu_Click">
                     <MenuItem x:Name="Current_Race" Click="MenuItem_Open_CurrentRaceScreen" Header="Current Race"/>
                     <MenuItem x:Name="Current_Competition" Click="MenuItem_Open_CurrentCompetitionScreen" Header="Current Competition"/>
                     <MenuItem x:Name="CloseApplication" Header="Close Application" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
             </Menu>
+
         </DockPanel>
     </Grid>
 </Window>

@@ -119,6 +119,7 @@ namespace WpfRaceSim
                   break;
                case SectionTypes.LeftCorner:
                   DrawDefaults(graphics, Images.GetImageOutOfFolder(_cornerLeft), x, y, _direction);
+                  CalculateDirection(SectionTypes.LeftCorner);
                   if (sd.Left != null)
                   {
                      IParticipant participant = sd.Left;
@@ -129,10 +130,10 @@ namespace WpfRaceSim
                      IParticipant participant = sd.Right;
                      DrawDriver(graphics, participant, sd, x, y, _direction);
                   }
-                  CalculateDirection(SectionTypes.LeftCorner);
                   break;
                case SectionTypes.RightCorner:
                   DrawDefaults(graphics, Images.GetImageOutOfFolder(_cornerRight), x, y, _direction);
+                  CalculateDirection(SectionTypes.RightCorner);
                   if (sd.Left != null)
                   {
                      IParticipant participant = sd.Left;
@@ -143,7 +144,6 @@ namespace WpfRaceSim
                      IParticipant participant = sd.Right;
                      DrawDriver(graphics, participant, sd, x, y, _direction);
                   }
-                  CalculateDirection(SectionTypes.RightCorner);
                   break;
             }
             switch (_direction)

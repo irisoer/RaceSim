@@ -110,8 +110,8 @@ namespace RaceSim
          Console.CursorVisible = false;
          Console.CursorLeft = 30;
          Console.CursorTop = 1;
-         //Console.WindowHeight = Console.LargestWindowHeight;
-         //Console.WindowWidth = Console.LargestWindowWidth;
+         Console.WindowHeight = Console.LargestWindowHeight;
+         Console.WindowWidth = Console.LargestWindowWidth;
 
          Console.WriteLine($"The next Track in this competition is: {t.Name}");
          foreach (Section section in t.Sections)

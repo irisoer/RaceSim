@@ -133,6 +133,7 @@ namespace Controller
 
       public static void NextRace()
       {
+         Competition.CompetitionStats = CurrentRace.RaceStats;
          Track newTrack = Data.Competition.NextTrack();
          if (newTrack != null)
          {
