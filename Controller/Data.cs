@@ -23,11 +23,8 @@ namespace Controller
       {
          Competition = new Competition();
          AddParticipants();
-         foreach (var participant in Competition.Participants)
-         {
-            Competition.CompetitionStats.Add(participant, 0);
-         }
          AddTracks();
+         AddParticipantsToCompetitionStats();
          if (Competition.Tracks.Count < 2) //check if there are at least 2 tracks in competition
          {
             throw new ArgumentException("There must be at least 2 tracks in a competition");
@@ -95,6 +92,7 @@ namespace Controller
             SectionTypes.Straight,
             SectionTypes.Straight
          }));
+         
          #endregion
          #region Assen
          Competition.Tracks.Enqueue(new Track("Assen", 3, new[]
@@ -137,7 +135,6 @@ namespace Controller
 
       public static void NextRace()
       {
-         
          Track newTrack = Data.Competition.NextTrack();
          if (newTrack != null)
          {
@@ -149,17 +146,16 @@ namespace Controller
             Console.WriteLine("No more races");
 
          }
-         EditCompetitionStats();
          CurrentRace.Start();
 
-      } 
+      }
 
 
-      public static void EditCompetitionStats()
+      public static void AddParticipantsToCompetitionStats()
       {
-         foreach(var participant in Competition.Participants)
+         foreach (var participant in Competition.Participants)
          {
-            Competition.CompetitionStats[participant] = CurrentRace.RaceStats[participant];
+            Competition.CompetitionStats.Add(participant, 0);
          }
       }
 

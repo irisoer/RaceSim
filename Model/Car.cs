@@ -13,6 +13,7 @@ namespace Model
       public int Performance { get; set; }
       public int Speed { get; set; }
       public bool IsBroken { get; set; }
+      public string EquipmentStatus { get; set; }
       #endregion
 
       #region Constructors
@@ -22,6 +23,7 @@ namespace Model
          Performance = performance;
          Speed = speed;
          IsBroken = false;
+         EquipmentStatus = "Perfect";
       } 
 
       #endregion

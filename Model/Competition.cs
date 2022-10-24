@@ -11,7 +11,7 @@ namespace Model
       #region Properties
       public List<IParticipant> Participants { get; set; }
       public Dictionary<IParticipant, int> CompetitionStats { get; set; }
-      public Queue<Track> Tracks { get; set; } 
+      public Queue<Track> Tracks { get; set; }
       #endregion
 
       #region Constructors
@@ -35,6 +35,8 @@ namespace Model
          }
 
       } 
+
+
       #endregion
    }
 }

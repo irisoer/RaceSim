@@ -11,7 +11,6 @@ namespace Model
    public class Track
    {
       #region Properties
-      private int myVar;
       private int _rounds { get; set; }
       public int Rounds {
          get { return _rounds;  } private set{_rounds = value;} 

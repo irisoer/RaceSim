@@ -15,7 +15,7 @@
         </Label>
         <DockPanel LastChildFill="False">
             <Menu DockPanel.Dock="Top" Height="20" Width="54.84">
-                <MenuItem x:Name="Menu" HeaderStringFormat="Menu" Header="Menu" FontSize="16" HorizontalAlignment="Center" Click="Menu_Click">
+                <MenuItem x:Name="Menu" HeaderStringFormat="Menu" Header="Menu" FontSize="16" HorizontalAlignment="Center">
                     <MenuItem x:Name="Current_Race" Click="MenuItem_Open_CurrentRaceScreen" Header="Current Race"/>
                     <MenuItem x:Name="Current_Competition" Click="MenuItem_Open_CurrentCompetitionScreen" Header="Current Competition"/>
                     <MenuItem x:Name="CloseApplication" Header="Close Application" Click="MenuItem_Exit_Click"/>

@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfRaceSim"
         mc:Ignorable="d"
-        Title="CurrentCompetitionScreen" Height="1080" Width="1920">
-    <Grid>
-        
+        Title="CurrentCompetitionScreen" Height="600" Width="800">
+    <Grid Margin="0,0,0,0">
+        <Grid.DataContext>
+            <local:DataContext/>
+        </Grid.DataContext>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Background="AliceBlue" Grid.Row="0" x:Name="CompetitionStatsLV" ItemsSource="{Binding CompetitionStats}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="800" Header="Competition stats"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label FontSize="16" FontWeight="Bold" Content="{Binding TracksToGoText, Mode=OneWay}" Margin="0,495,0,19"/>
     </Grid>
 </Window>

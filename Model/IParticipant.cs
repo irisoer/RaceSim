@@ -15,7 +15,6 @@ namespace Model
       Yellow,
       White,
       Purple,
-
    } 
    #endregion
 
@@ -28,6 +27,7 @@ namespace Model
       public IEquipment Equipment { get; set; }
       public TeamColors TeamColor { get; set; }
       public LinkedListNode<Section> CurrentSection { get; set; }
+      public int PassedFinishCounter { get; set; }
       public bool IsFinished { get; set; }
       public int Rounds { get; set; }
 

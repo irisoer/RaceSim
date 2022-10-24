@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfRaceSim"
         mc:Ignorable="d"
-        Title="CurrentRaceScreen" Height="1080" Width="1920">
-    <Grid>
-        
+        Title="CurrentRaceScreen" Height="600" Width="800">
+    <Grid Margin="0,0,0,66">
+        <Grid.DataContext>
+            <local:DataContext/>
+        </Grid.DataContext>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Background="AliceBlue" Grid.Column="0" x:Name="RaceStatsLV" ItemsSource="{Binding RoundCount}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="400" Header="RaceStats"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView Grid.Column="1" x:Name="EquipmentStatusLV" d:ItemsSource="{Binding EquipmentStatus}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="{Binding DriversFinished, Mode=OneWay}" HorizontalAlignment="Left" Margin="306,545,0,0" VerticalAlignment="Top" Width="200" Height="20">
+            <Label.DataContext>
+                <local:DataContext/>
+            </Label.DataContext>
+        </Label>
     </Grid>
 </Window>

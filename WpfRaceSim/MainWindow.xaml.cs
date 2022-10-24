@@ -23,21 +23,21 @@ namespace WpfRaceSim
    /// </summary>
    public partial class MainWindow : Window
    {
-      private CurrentCompetitionScreen _currentCompetitionScreen = new CurrentCompetitionScreen();
-      private CurrentRaceScreen _currentRaceScreen = new CurrentRaceScreen();
+      private CurrentCompetitionScreen _currentCompetitionScreen;
+      private CurrentRaceScreen _currentRaceScreen;
       public MainWindow()
       {
-         MainWindowInitialize();
-      }
+         Data.Initialize();        
+         _currentRaceScreen = new CurrentRaceScreen();
+         _currentCompetitionScreen = new CurrentCompetitionScreen();
 
-      public void MainWindowInitialize()
-      {
-         Data.Initialize();
          Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
          Data.CurrentRace.DriversChanged += OnDriversChangedEventHandlerMethod;
-        
+
+
          InitializeComponent();
       }
+
 
       public void OnDriversChangedEventHandlerMethod(object? sender, DriversChangedEventArgs e)
       {
@@ -74,9 +74,5 @@ namespace WpfRaceSim
          Application.Current.Shutdown();
       }
 
-      private void Menu_Click(object sender, RoutedEventArgs e)
-      {
-
-      }
    }
 }
