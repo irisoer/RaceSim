@@ -48,7 +48,7 @@ namespace Controller
          }
          _finishedDrivers = new Queue<IParticipant>();   
          _positions = new Dictionary<Section, SectionData>();
-         _timer = new Timer(250);
+         _timer = new Timer(150);
          _timer.Elapsed += OnTimedEvent;
          Rounds = track.Rounds;
          _oldName = new Dictionary<IParticipant, string>();
