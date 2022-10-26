@@ -60,10 +60,7 @@ namespace WpfRaceSim
          posRight = _xpos + 100;
 
          Bitmap trackImage = PlaceSections(track, emptyImage);
-         //Bitmap participantImage = DrawDriverOnTrack(track, trackImage);
          return Images.CreateBitmapSourceFromGdiBitmap(trackImage);
-
-         //return Images.CreateBitmapSourceFromGdiBitmap(Images.CreateBitmap(1920,1080));
       }
 
       public static Bitmap PlaceSections(Track t, Bitmap bitmap)
@@ -223,12 +220,6 @@ namespace WpfRaceSim
          return y;
       }
 
-      //private static Bitmap DrawDriverOnTrack(Track track, Bitmap bitmap)
-      //{
-      //   Graphics graphics = Graphics.FromImage(bitmap);
-      //   Bitmap bitmapDrivers = new Bitmap(bitmap);
-
-      //}
 
       private static string GetDriverImage(IParticipant driver)
       {
