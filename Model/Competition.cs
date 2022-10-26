@@ -10,6 +10,7 @@ namespace Model
    {
       #region Properties
       public List<IParticipant> Participants { get; set; }
+      public string Winner { get; set; }
       public Dictionary<IParticipant, int> CompetitionStats { get; set; }
       public Queue<Track> Tracks { get; set; }
       #endregion
@@ -33,7 +34,6 @@ namespace Model
          {
             return null;
          }
-
       } 
 
 

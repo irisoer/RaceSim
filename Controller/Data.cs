@@ -142,9 +142,7 @@ namespace Controller
          }
          else
          {
-            CurrentRace = null;
             Console.WriteLine("No more races");
-
          }
          CurrentRace.Start();
 
@@ -159,6 +157,32 @@ namespace Controller
          }
       }
 
+
+      public static string PeekInTrackQueue()
+      {
+         try
+         {
+            return Competition.Tracks.Peek().Name.ToString();
+
+         } catch (System.InvalidOperationException) { 
+            return "no tracks left";
+         }
+      }
+
+      public static void CalculateWinner()
+      {
+         int highestpoints = 0;
+         IParticipant participant1 = null;
+         foreach(var participant in Competition.Participants)
+         {
+            if (participant.Points > highestpoints)
+            {
+               highestpoints = participant.Points;
+               participant1 = participant;   
+            }
+         }
+         Competition.Winner = $"The winner is {participant1.Name} from team {participant1.TeamColor}";
+      }
       #endregion
 
 

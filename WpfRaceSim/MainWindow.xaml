@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfRaceSim"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
+        Title="MainWindow" Height="1080" Width="1920" Closing="Main_Window_Closing">
     <Grid Background="#FF63A29A">
         <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="984" VerticalAlignment="Top" Width="1750" Margin="80,42,0,0"/>
         <Label FontSize="16" FontWeight="Bold" Height="1002" VerticalAlignment="Top" Margin="128,10,1508,0" Content="{Binding TrackName, Mode=OneWay}">
@@ -21,6 +21,7 @@
                     <MenuItem x:Name="CloseApplication" Header="Close Application" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
             </Menu>
+
 
         </DockPanel>
     </Grid>

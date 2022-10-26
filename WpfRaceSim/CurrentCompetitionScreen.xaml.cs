@@ -44,12 +44,15 @@ namespace WpfRaceSim
 
       public void OnRaceChangedEventHandlerMethod(Race previous, Race next)
       {
-         previous.DriversChanged -= OnDriversChangedEventHandlerMethod;
+         previous.Cleanup();
          next.DriversChanged += OnDriversChangedEventHandlerMethod;
-         previous.RaceChanged -= OnRaceChangedEventHandlerMethod;
          next.RaceChanged += OnRaceChangedEventHandlerMethod;
       }
 
-
+      private void CurrentCompetition_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+      {
+         e.Cancel = true;
+         this.Hide();
+      }
    }
 }

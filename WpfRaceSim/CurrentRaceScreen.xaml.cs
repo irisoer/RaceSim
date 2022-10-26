@@ -49,15 +49,12 @@ namespace WpfRaceSim
             EquipmentStatusLV.ItemsSource = null;
             EquipmentStatusLV.ItemsSource = dataContext.EquipmentStatus;
          }));
-
-
       }
 
       public void OnRaceChangedEventHandlerMethod(Race previous, Race next)
       {
-         previous.DriversChanged -= OnDriversChangedEventHandlerMethod;
+         previous.Cleanup();
          next.DriversChanged += OnDriversChangedEventHandlerMethod;
-         previous.RaceChanged -= OnRaceChangedEventHandlerMethod;
          next.RaceChanged += OnRaceChangedEventHandlerMethod; 
       }
 

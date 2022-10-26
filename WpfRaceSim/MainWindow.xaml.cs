@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -53,11 +54,14 @@ namespace WpfRaceSim
       public void RaceChangedDelegateMethod(Race previousRace, Race nextRace)
       {
          Images.ClearImageDictionary();
-         previousRace.DriversChanged -= OnDriversChangedEventHandlerMethod;
-         previousRace.RaceChanged -= RaceChangedDelegateMethod;
-         nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
-         nextRace.RaceChanged += RaceChangedDelegateMethod;
+         previousRace.Cleanup();
+         if (nextRace != null)
+         {
+            nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
+            nextRace.RaceChanged += RaceChangedDelegateMethod;
+         }
       }
+      
 
       private void MenuItem_Open_CurrentRaceScreen(object sender, RoutedEventArgs e)
       {
@@ -74,5 +78,10 @@ namespace WpfRaceSim
          Application.Current.Shutdown();
       }
 
+      private void Main_Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+      {
+         e.Cancel = true;
+         Application.Current.Shutdown();
+      }
    }
 }

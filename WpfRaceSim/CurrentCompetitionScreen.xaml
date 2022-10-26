@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfRaceSim"
         mc:Ignorable="d"
-        Title="CurrentCompetitionScreen" Height="600" Width="800">
+        Title="CurrentCompetitionScreen" Height="600" Width="800" Closing="CurrentCompetition_Closing">
     <Grid Margin="0,0,0,0">
         <Grid.DataContext>
             <local:DataContext/>
