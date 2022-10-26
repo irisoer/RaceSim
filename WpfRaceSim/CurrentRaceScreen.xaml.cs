@@ -60,5 +60,11 @@ namespace WpfRaceSim
          previous.RaceChanged -= OnRaceChangedEventHandlerMethod;
          next.RaceChanged += OnRaceChangedEventHandlerMethod;
       }
+
+      //private void CurrentRace_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+      //{
+      //   e.Cancel = true;
+      //   this.Hide();
+      //}
    }
 }
