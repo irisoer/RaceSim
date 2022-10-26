@@ -40,10 +40,6 @@ namespace WpfRaceSim
             CompetitionStatsLV.ItemsSource = null;
             CompetitionStatsLV.ItemsSource = dataContext.CompetitionStats;
          }));
-
-
-
-
       }
 
       public void OnRaceChangedEventHandlerMethod(Race previous, Race next)

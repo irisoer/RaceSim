@@ -19,7 +19,6 @@ namespace Controller
       private Random _random { get; set; }
       private Queue<IParticipant> _finishedDrivers { get; set; }
       private Dictionary<Section, SectionData> _positions { get; set; }
-      public Dictionary<IParticipant, int> RaceStats { get; set; }
       private Dictionary<IParticipant, string> _oldName { get; set; }
       public int Rounds { get; set; }
       public Timer _timer { get; set; }
@@ -41,11 +40,6 @@ namespace Controller
       {
          Track = track;
          Participants = participants;
-         RaceStats = new Dictionary<IParticipant, int>();
-         foreach(var participant in Participants)
-         {
-            RaceStats.Add(participant, 0);
-         }
          _finishedDrivers = new Queue<IParticipant>();   
          _positions = new Dictionary<Section, SectionData>();
          _timer = new Timer(150);
@@ -241,14 +235,18 @@ namespace Controller
             IParticipant participant = _finishedDrivers.Dequeue();
             participant.Points = PointsToGive;
             PointsToGive = PointsToGive / 2;
-            RaceStats[participant] = participant.Points;
-            int oldPoints = Data.Competition.CompetitionStats[participant];
-            Data.Competition.CompetitionStats[participant] = oldPoints+participant.Points;
          }
 
          Thread.Sleep(500);
+
          Data.NextRace();
          RaceChanged?.Invoke(this, Data.CurrentRace); 
+      }
+
+      public void Cleanup()
+      {
+         DriversChanged = null;
+         RaceChanged = null;
       }
 
       #endregion

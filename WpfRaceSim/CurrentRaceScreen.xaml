@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfRaceSim"
         mc:Ignorable="d"
-        Title="CurrentRaceScreen" Height="600" Width="800">
-    <Grid Margin="0,0,0,66">
+        Title="CurrentRaceScreen" Height="600" Width="800" Closing="CurrentRace_Closing_1">
+    <Grid Margin="0,0,0,-6">
         <Grid.DataContext>
             <local:DataContext/>
         </Grid.DataContext>
@@ -14,6 +14,10 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="266*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
         <ListView Background="AliceBlue" Grid.Column="0" x:Name="RaceStatsLV" ItemsSource="{Binding RoundCount}">
             <ListView.View>
                 <GridView>
@@ -24,14 +28,11 @@
         <ListView Grid.Column="1" x:Name="EquipmentStatusLV" d:ItemsSource="{Binding EquipmentStatus}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Width="400" Header="Equipment status"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="{Binding DriversFinished, Mode=OneWay}" HorizontalAlignment="Left" Margin="306,545,0,0" VerticalAlignment="Top" Width="200" Height="20">
-            <Label.DataContext>
-                <local:DataContext/>
-            </Label.DataContext>
-        </Label>
+        <Label FontSize="16" FontWeight="Bold" Content="{Binding NextTrackName, Mode=OneWay}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Width="366" Margin="0,22,0,0"/>
+
     </Grid>
 </Window>

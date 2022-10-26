@@ -16,7 +16,8 @@ namespace WpfRaceSim
    {
       public event PropertyChangedEventHandler? PropertyChanged;
       public event NotifyCollectionChangedEventHandler? CollectionChanged;
-      public string TrackName => Data.CurrentRace.Track.Name;
+      public string TrackName => $"Current track {Data.CurrentRace.Track.Name}";
+      public string NextTrackName => $"The next track in this competition is {Data.Competition.Tracks.Peek().Name.ToString()}";
       public int TrackRounds => Data.CurrentRace.Track.Rounds;
       public int TracksToGo => Data.Competition.Tracks.Count;
       public string TracksToGoText => $"There are {TracksToGo} tracks left in this competition";
