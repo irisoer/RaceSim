@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace WpfRaceSim
 
          Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
          Data.CurrentRace.DriversChanged += OnDriversChangedEventHandlerMethod;
-
+         Data.CurrentRace.Start();
 
          InitializeComponent();
       }

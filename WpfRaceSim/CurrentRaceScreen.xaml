@@ -32,7 +32,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label FontSize="16" FontWeight="Bold" Content="{Binding NextTrackName, Mode=OneWay}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Width="366" Margin="0,22,0,0"/>
+        <Label FontSize="16" FontWeight="Bold" Content="{Binding NextTrackName, Mode=OneWay}" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="772" Margin="10,10,0,0" Height="33" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

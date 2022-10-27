@@ -22,7 +22,7 @@ namespace WpfRaceSim
       public int TracksToGo => Data.Competition.Tracks.Count;
       public string CompetitionWinner = Data.Competition.Winner;
       public string TracksToGoText => $"There are {TracksToGo} tracks left in this competition";
-      public List<string> CompetitionStats => Data.Competition.Participants.Select(x => $"{x.Name} » Points: {x.Points}").ToList();
+      public List<string> CompetitionStats => Data.Competition.Participants.Select(x => $"{x.Name} (team {x.TeamColor.ToString()}) » Points: {x.Points}").ToList();
       public List<string> RoundCount => Data.CurrentRace.Participants.Select(x => $"{x.Name} (team {x.TeamColor.ToString()}) has finished {x.Rounds} of {TrackRounds} rounds").ToList();
       public List<string> EquipmentStatus => Data.CurrentRace.Participants.Select(x => $"{x.Name} » Equipment: {x.Equipment.EquipmentStatus}").ToList();
 

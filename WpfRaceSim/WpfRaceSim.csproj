@@ -8,7 +8,81 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Media\" />
+    <None Remove="Media\carBlue.png" />
+    <None Remove="Media\carBlueBroken.png" />
+    <None Remove="Media\carOrange.png" />
+    <None Remove="Media\carOrangeBroken.png" />
+    <None Remove="Media\carPurple.png" />
+    <None Remove="Media\carPurpleBroken.png" />
+    <None Remove="Media\carRed.png" />
+    <None Remove="Media\carRedBroken.png" />
+    <None Remove="Media\carWhite.png" />
+    <None Remove="Media\carWhiteBroken.png" />
+    <None Remove="Media\carYellow.png" />
+    <None Remove="Media\carYellowBroken.png" />
+    <None Remove="Media\cornerLeft.png" />
+    <None Remove="Media\cornerRight.png" />
+    <None Remove="Media\finish.png" />
+    <None Remove="Media\grass.png" />
+    <None Remove="Media\start.png" />
+    <None Remove="Media\straight.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Media\carBlue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carBlueBroken.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carOrange.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carOrangeBroken.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carPurple.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carPurpleBroken.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carRed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carRedBroken.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carWhite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carWhiteBroken.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carYellow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\carYellowBroken.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\cornerLeft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\cornerRight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\finish.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\grass.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\start.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\straight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -26,7 +26,6 @@ namespace WpfRaceSim
       public DataContext dataContext = new DataContext();
       public CurrentRaceScreen()
       {
-         Data.Initialize();
          Data.CurrentRace.DriversChanged += OnDriversChangedEventHandlerMethod;
          Data.CurrentRace.RaceChanged += OnRaceChangedEventHandlerMethod;
          InitializeComponent(); 

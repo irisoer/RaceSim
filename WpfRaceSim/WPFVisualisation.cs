@@ -16,23 +16,24 @@ namespace WpfRaceSim
    {
 
       #region Graphics
-      private const string _start = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\start.png";
-      private const string _straight = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\straight.png";
-      private const string _finish = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\finish.png";
-      private const string _cornerRight = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\cornerRight.png";
-      private const string _cornerLeft = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\cornerLeft.png";
-      private const string _carBlue = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carBlue.png";
-      private const string _carBlueBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carBlueBroken.png";
-      private const string _carOrange = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carOrange.png";
-      private const string _carOrangeBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carOrangeBroken.png";
-      private const string _carPurple = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carPurple.png";
-      private const string _carPurpleBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carPurpleBroken.png";
-      private const string _carRed = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carRed.png";
-      private const string _carRedBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carRedBroken.png";
-      private const string _carWhite = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carWhite.png";
-      private const string _carWhiteBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carWhiteBroken.png";
-      private const string _carYellow = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carYellow.png";
-      private const string _carYellowBroken = "C:\\Users\\iris_\\source\\repos\\RaceSim\\WpfRaceSim\\Media\\carYellowBroken.png";
+      private const string _start = "Media\\start.png";
+      private const string _straight = "Media\\straight.png";
+      private const string _finish = "Media\\finish.png";
+      private const string _cornerRight = "Media\\cornerRight.png";
+      private const string _cornerLeft = "Media\\cornerLeft.png";
+      private const string _carBlue = "Media\\carBlue.png";
+      private const string _carBlueBroken = "Media\\carBlueBroken.png";
+      private const string _carOrange = "Media\\carOrange.png";
+      private const string _carOrangeBroken = "Media\\carOrangeBroken.png";
+      private const string _carPurple = "Media\\carPurple.png";
+      private const string _carPurpleBroken = "Media\\carPurpleBroken.png";
+      private const string _carRed = "Media\\carRed.png";
+      private const string _carRedBroken = "Media\\carRedBroken.png";
+      private const string _carWhite = "Media\\carWhite.png";
+      private const string _carWhiteBroken = "Media\\carWhiteBroken.png";
+      private const string _carYellow = "Media\\carYellow.png";
+      private const string _carYellowBroken = "Media\\carYellowBroken.png";
+      private const string _grass = "Media\\grass.png";
       #endregion
 
       private enum Direction
@@ -69,6 +70,7 @@ namespace WpfRaceSim
          int y = _ypos;
          
          Graphics graphics = Graphics.FromImage(bitmap);
+         DrawDefaults(graphics, Images.GetImageOutOfFolder(_grass), 0, 0, Direction.East);
          foreach (Section section in t.Sections)
          {
             SectionData sd = Data.CurrentRace.GetSectionData(section);

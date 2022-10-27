@@ -62,7 +62,6 @@ namespace Controller
       public void Start()
       {
          _timer.Start();
-         DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
       }
       public void RandomizeEquipment()
       {
@@ -137,10 +136,12 @@ namespace Controller
       public void OnTimedEvent(object o, EventArgs e)
       {
          _timer.Stop();
-         foreach (IParticipant participant in Participants)
+         foreach (IParticipant participant in Participants.Where(x => !_finishedDrivers.Contains(x)))
          {
+            
             if (participant.IsFinished != true)
             {
+               Debug.WriteLineIf(participant.IsFinished, participant.Name + " is Finished1");
                EquipmentBroke();
 
                int distance = (participant.Equipment.Speed * participant.Equipment.Performance);
@@ -166,8 +167,8 @@ namespace Controller
                   sectiondata = GetSectionData(participant.CurrentSection.ValueRef); //get new sectiondata
                   if (sectiondata.IsFull())
                   {
-                     participant.CurrentSection = participant.CurrentSection.Next;
-                     if (participant.CurrentSection.Value.SectionType == SectionTypes.Finish) //check if driver finished race
+                     participant.CurrentSection = participant.CurrentSection.Next ?? participant.CurrentSection.List.First;
+                     if (participant.CurrentSection.Value.SectionType == SectionTypes.Finish) //check if driver passed finish
                      {
                         participant.PassedFinishCounter++;
                         if (participant.Rounds != Rounds && participant.PassedFinishCounter > 1)
@@ -180,33 +181,33 @@ namespace Controller
                   sectiondata.AddParticipantToSection(participant, newPosition);
                }
                else
-               {
-
-                  if (participant.Rounds != Rounds || (participant.Rounds == Rounds && participant.CurrentSection.Value.SectionType == SectionTypes.Finish)) //check if driver not finished & over finish
-                  {
-                     sectiondata.MoveParticipantOnSection(participant, distance);
-                  }
+               { 
+                
+                   sectiondata.MoveParticipantOnSection(participant, distance);
+                 
                }
-               if (participant.Rounds == Rounds && participant.CurrentSection.Value.SectionType != SectionTypes.Finish) //if driver finished and over finish
+               if ((participant.Rounds == Rounds) && (participant.CurrentSection.Value.SectionType == SectionTypes.Finish)) //if driver finished and over finish
                {
-                  if (participant.IsFinished != true)
+                  if (!participant.IsFinished && !(_finishedDrivers.Contains(participant)))
                   {
                      _finishedDrivers.Enqueue(participant);
-                     sectiondata.RemoveParticipantFromSection(participant);
+                     Debug.WriteLine(participant.TeamColor + " is Finished2");
+                     GetSectionData(participant.CurrentSection.ValueRef).RemoveParticipantFromSection(participant);
                      participant.IsFinished = true;
-                     Debug.WriteLine(participant.Name, participant.IsFinished.ToString()); //TODO: Waarom voeg je ze vaker dan 1x toe terwijl ik dit 2x controleer?
+                     if(NoDriversleftOnTrack() == true)
+                     {
+                        End();
+                        return;
+                     };
+                     Debug.WriteLine(participant.TeamColor, participant.IsFinished.ToString()); //TODO: Waarom voeg je ze vaker dan 1x toe terwijl ik dit 2x controleer?
                   }
+                  
                }
             }
-            DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
-               EquipmentRepair();
-               _timer.Start();
+             DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
+             EquipmentRepair();
          }
-         if (_finishedDrivers.Count == Participants.Count)
-            {
-               End();
-               return;
-            }
+         _timer.Start();
       }
 
       public void EquipmentBroke()
@@ -238,6 +239,18 @@ namespace Controller
          }
       }
 
+      public Boolean NoDriversleftOnTrack()
+      {
+         foreach(var section in Track.Sections)
+         {
+            if((GetSectionData(section).Left != null) || (GetSectionData(section).Right != null))
+            {
+               return false;
+            }
+         }
+         return true; 
+      }
+
       public int ReturnFinishedDrivers()
       {
          int x = _finishedDrivers.Count();
@@ -248,13 +261,14 @@ namespace Controller
       {
          int PointsToGive = 10;
          _timer.Stop();
+         _timer.Elapsed -= OnTimedEvent;
          while(_finishedDrivers.Count > 0)
          {
             IParticipant participant = _finishedDrivers.Dequeue();
-            participant.Points = PointsToGive;
+            participant.Points += PointsToGive;
             PointsToGive = PointsToGive / 2;
          }
-         Thread.Sleep(500);
+         //Thread.Sleep(500);
          Data.NextRace();
          RaceChanged?.Invoke(this, Data.CurrentRace); 
       }

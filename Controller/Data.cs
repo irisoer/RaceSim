@@ -131,6 +131,7 @@ namespace Controller
             SectionTypes.Straight
          })); ;
          #endregion
+
       }
 
       public static void NextRace()

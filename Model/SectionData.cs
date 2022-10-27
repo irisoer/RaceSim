@@ -8,10 +8,18 @@ namespace Model
 {
    public class SectionData
    {
-      public IParticipant Left { get; set; }
+      public IParticipant? Left { get; set; }
       public int DistanceLeft { get; set; }
-      public IParticipant Right { get; set; }
+      public IParticipant? Right { get; set; }
       public int DistanceRight { get; set; }
+
+      public SectionData()
+      {
+         DistanceLeft = 0;
+         DistanceRight = 0;
+         Left = null;
+         Right = null;
+      }
 
       public bool IsFull()
       {
@@ -47,6 +55,9 @@ namespace Model
          {
             Right = participant;
             DistanceRight += newPosition;
+         } else
+         {
+            throw new Exception("Jo");
          }
       }
 
