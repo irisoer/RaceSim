@@ -47,6 +47,7 @@ namespace WpfRaceSim
       private static int posLeft;
       private static int posRight;
 
+
       private static Direction _direction { get; set; }
 
 
@@ -66,12 +67,18 @@ namespace WpfRaceSim
 
       public static Bitmap PlaceSections(Track t, Bitmap bitmap)
       { 
-         Random random = new Random();
          int x = _xpos;
          int y = _ypos;
          
          Graphics graphics = Graphics.FromImage(bitmap);
-         DrawDefaults(graphics, Images.GetImageOutOfFolder(_sand), 0, 0, Direction.East);
+         if (t.Name.Equals("Zandvoort"))
+         {
+            DrawDefaults(graphics, Images.GetImageOutOfFolder(_sand), 0, 0, Direction.East);
+         }
+         else
+         {
+            DrawDefaults(graphics, Images.GetImageOutOfFolder(_grass), 0, 0, Direction.East);
+         }
          foreach (Section section in t.Sections)
          {
             SectionData sd = Data.CurrentRace.GetSectionData(section);
