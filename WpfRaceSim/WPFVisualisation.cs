@@ -34,6 +34,7 @@ namespace WpfRaceSim
       private const string _carYellow = "Media\\carYellow.png";
       private const string _carYellowBroken = "Media\\carYellowBroken.png";
       private const string _grass = "Media\\grass.png";
+      private const string _sand = "Media\\sand.png";
       #endregion
 
       private enum Direction
@@ -44,8 +45,7 @@ namespace WpfRaceSim
       private static int _xpos;
       private static int _ypos;
       private static int posLeft;
-      private static int posRight;  
-
+      private static int posRight;
 
       private static Direction _direction { get; set; }
 
@@ -65,12 +65,13 @@ namespace WpfRaceSim
       }
 
       public static Bitmap PlaceSections(Track t, Bitmap bitmap)
-      {
+      { 
+         Random random = new Random();
          int x = _xpos;
          int y = _ypos;
          
          Graphics graphics = Graphics.FromImage(bitmap);
-         DrawDefaults(graphics, Images.GetImageOutOfFolder(_grass), 0, 0, Direction.East);
+         DrawDefaults(graphics, Images.GetImageOutOfFolder(_sand), 0, 0, Direction.East);
          foreach (Section section in t.Sections)
          {
             SectionData sd = Data.CurrentRace.GetSectionData(section);

@@ -85,7 +85,7 @@ namespace Controller
 
       public void ParticipantsStartPosition(Track track, List<IParticipant> participants) //todo methodes werkwoorden meegeven
       {
-         if(participants.Count < 3) //check if there are 3 or more drivers
+         if (participants.Count < 3) //check if there are 3 or more drivers
          {
             throw new ArgumentException("There must be at least 3 drivers in a race");
          }
@@ -138,10 +138,6 @@ namespace Controller
          _timer.Stop();
          foreach (IParticipant participant in Participants.Where(x => !_finishedDrivers.Contains(x)))
          {
-            
-            if (participant.IsFinished != true)
-            {
-               Debug.WriteLineIf(participant.IsFinished, participant.Name + " is Finished1");
                EquipmentBroke();
 
                int distance = (participant.Equipment.Speed * participant.Equipment.Performance);
@@ -171,39 +167,27 @@ namespace Controller
                      if (participant.CurrentSection.Value.SectionType == SectionTypes.Finish) //check if driver passed finish
                      {
                         participant.PassedFinishCounter++;
-                        if (participant.Rounds != Rounds && participant.PassedFinishCounter > 1)
-                        {
-                           participant.Rounds++;
-                        }
+                        if (participant.Rounds != Rounds && participant.PassedFinishCounter > 1) { participant.Rounds++; }
                      }
                      sectiondata = GetSectionData(participant.CurrentSection.ValueRef);
                   }
                   sectiondata.AddParticipantToSection(participant, newPosition);
                }
-               else
-               { 
-                
-                   sectiondata.MoveParticipantOnSection(participant, distance);
-                 
-               }
+               else { sectiondata.MoveParticipantOnSection(participant, distance); }
                if ((participant.Rounds == Rounds) && (participant.CurrentSection.Value.SectionType == SectionTypes.Finish)) //if driver finished and over finish
                {
                   if (!participant.IsFinished && !(_finishedDrivers.Contains(participant)))
                   {
                      _finishedDrivers.Enqueue(participant);
-                     Debug.WriteLine(participant.TeamColor + " is Finished2");
                      GetSectionData(participant.CurrentSection.ValueRef).RemoveParticipantFromSection(participant);
                      participant.IsFinished = true;
-                     if(NoDriversleftOnTrack() == true)
+                     if (NoDriversleftOnTrack() == true) 
                      {
                         End();
                         return;
                      };
-                     Debug.WriteLine(participant.TeamColor, participant.IsFinished.ToString()); //TODO: Waarom voeg je ze vaker dan 1x toe terwijl ik dit 2x controleer?
                   }
-                  
                }
-            }
              DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
              EquipmentRepair();
          }
@@ -239,7 +223,7 @@ namespace Controller
          }
       }
 
-      public Boolean NoDriversleftOnTrack()
+      public Boolean NoDriversleftOnTrack() //check if track empty
       {
          foreach(var section in Track.Sections)
          {
@@ -268,7 +252,7 @@ namespace Controller
             participant.Points += PointsToGive;
             PointsToGive = PointsToGive / 2;
          }
-         //Thread.Sleep(500);
+         Thread.Sleep(500);
          Data.NextRace();
          RaceChanged?.Invoke(this, Data.CurrentRace); 
       }

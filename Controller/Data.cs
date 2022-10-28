@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -140,13 +141,14 @@ namespace Controller
          if (newTrack != null)
          {
             CurrentRace = new Race(newTrack, Competition.Participants);
+            CurrentRace.Start();
          }
          else
          {
+            CurrentRace = null;
+            CalculateWinner();
             Console.WriteLine("No more races");
          }
-         CurrentRace.Start();
-
       }
 
 

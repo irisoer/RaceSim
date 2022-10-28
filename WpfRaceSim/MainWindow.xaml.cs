@@ -27,6 +27,7 @@ namespace WpfRaceSim
    {
       private CurrentCompetitionScreen _currentCompetitionScreen;
       private CurrentRaceScreen _currentRaceScreen;
+      public string CompetitionWinner => $"{Data.Competition.Winner}";
       public MainWindow()
       {
          Data.Initialize();        
@@ -60,6 +61,10 @@ namespace WpfRaceSim
          {
             nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
             nextRace.RaceChanged += RaceChangedDelegateMethod;
+         }
+         else
+         {
+            MessageBox.Show(CompetitionWinner);
          }
       }
       

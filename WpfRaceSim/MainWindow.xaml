@@ -21,6 +21,7 @@
                     <MenuItem x:Name="CloseApplication" Header="Close Application" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
             </Menu>
+            
 
 
         </DockPanel>

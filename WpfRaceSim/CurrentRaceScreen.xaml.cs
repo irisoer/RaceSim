@@ -53,8 +53,11 @@ namespace WpfRaceSim
       public void OnRaceChangedEventHandlerMethod(Race previous, Race next)
       {
          previous.Cleanup();
-         next.DriversChanged += OnDriversChangedEventHandlerMethod;
-         next.RaceChanged += OnRaceChangedEventHandlerMethod; 
+         if (next != null)
+         {
+            next.DriversChanged += OnDriversChangedEventHandlerMethod;
+            next.RaceChanged += OnRaceChangedEventHandlerMethod;
+         }
       }
 
       private void CurrentRace_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
