@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,8 +36,8 @@ namespace WpfRaceSim
          _currentRaceScreen = new CurrentRaceScreen();
          _currentCompetitionScreen = new CurrentCompetitionScreen();
 
-         Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
          Data.CurrentRace.DriversChanged += OnDriversChangedEventHandlerMethod;
+         Data.CurrentRace.RaceChanged += RaceChangedDelegateMethod;
          Data.CurrentRace.Start();
 
          InitializeComponent();
@@ -55,16 +57,13 @@ namespace WpfRaceSim
 
       public void RaceChangedDelegateMethod(Race previousRace, Race nextRace)
       {
-         Images.ClearImageDictionary();
+         ImagesGenerator.ClearImageDictionary();
          previousRace.Cleanup();
-         if (nextRace != null)
+         nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
+         nextRace.RaceChanged += RaceChangedDelegateMethod;
+         if(Data.RacesOver == true)
          {
-            nextRace.DriversChanged += OnDriversChangedEventHandlerMethod;
-            nextRace.RaceChanged += RaceChangedDelegateMethod;
-         }
-         else
-         {
-            MessageBox.Show(CompetitionWinner);
+            MessageBox.Show(CompetitionWinner, "Winner");
          }
       }
       

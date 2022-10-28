@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace WpfRaceSim
 {
-   static class Images
+   static class ImagesGenerator
    {
       private static Dictionary<string, Bitmap> _imageDictionary = new Dictionary<string, Bitmap>();
 

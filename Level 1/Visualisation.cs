@@ -21,7 +21,6 @@ namespace RaceSim
    {
       public static Direction _direction { get; set; } 
       public static Direction _newDirection { get; set; }
-      //public static Race _currentRace { get; set; }
       public static SectionTypes _lastSection { get; set; }
       public static int XPos = 40; 
       public static int YPos = 2;
@@ -54,7 +53,7 @@ namespace RaceSim
          "│░░░░░│",
          "│ 2   │", 
          "│   1 │" };
-      private static string[] _startHorizontal = { //misschien 1 en 2 omdraaien ivm logica 
+      private static string[] _startHorizontal = {
          "───────",
          " [2]   ",
          "   [1] ",

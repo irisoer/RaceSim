@@ -12,7 +12,6 @@ namespace Model
       #region Properties
       public List<IParticipant> Participants { get; set; }
       public string Winner { get; set; }
-      public Dictionary<IParticipant, int> CompetitionStats { get; set; }
       public Queue<Track> Tracks { get; set; }
       #endregion
 
@@ -20,7 +19,6 @@ namespace Model
       public Competition()
       {
          Participants = new List<IParticipant>();
-         CompetitionStats = new Dictionary<IParticipant, int>();
          Tracks = new Queue<Track>();
       } 
       #endregion

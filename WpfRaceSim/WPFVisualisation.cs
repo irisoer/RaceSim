@@ -54,7 +54,7 @@ namespace WpfRaceSim
       public static BitmapSource DrawTrack(Track track)
       {
 
-         Bitmap emptyImage = Images.CreateBitmap(1920, 1080);
+         Bitmap emptyImage = ImagesGenerator.CreateBitmap(1920, 1080);
 
          _xpos = (7 * _size);
          _ypos = 20;
@@ -62,7 +62,7 @@ namespace WpfRaceSim
          posRight = _xpos + 100;
 
          Bitmap trackImage = PlaceSections(track, emptyImage);
-         return Images.CreateBitmapSourceFromGdiBitmap(trackImage);
+         return ImagesGenerator.CreateBitmapSourceFromGdiBitmap(trackImage);
       }
 
       public static Bitmap PlaceSections(Track t, Bitmap bitmap)
@@ -73,11 +73,11 @@ namespace WpfRaceSim
          Graphics graphics = Graphics.FromImage(bitmap);
          if (t.Name.Equals("Zandvoort"))
          {
-            DrawDefaults(graphics, Images.GetImageOutOfFolder(_sand), 0, 0, Direction.East);
+            DrawDefaults(graphics, ImagesGenerator.GetImageOutOfFolder(_sand), 0, 0, Direction.East);
          }
          else
          {
-            DrawDefaults(graphics, Images.GetImageOutOfFolder(_grass), 0, 0, Direction.East);
+            DrawDefaults(graphics, ImagesGenerator.GetImageOutOfFolder(_grass), 0, 0, Direction.East);
          }
          foreach (Section section in t.Sections)
          {
@@ -86,7 +86,7 @@ namespace WpfRaceSim
             switch (section.SectionType) //switchcase which section to draw
             {
                case SectionTypes.StartGrid:
-                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_start), x, y, _direction);
+                  DrawDefaults(graphics, ImagesGenerator.GetImageOutOfFolder(_start), x, y, _direction);
                   if (sd.Left is not null)
                   {
                      IParticipant participant = sd.Left;
@@ -99,7 +99,7 @@ namespace WpfRaceSim
                   }
                   break;
                case SectionTypes.Straight:
-                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_straight), x, y, _direction);
+                  DrawDefaults(graphics, ImagesGenerator.GetImageOutOfFolder(_straight), x, y, _direction);
                   if (sd.Left is not null)
                   {
                      IParticipant participant = sd.Left;
@@ -112,7 +112,7 @@ namespace WpfRaceSim
                   }
                   break;
                case SectionTypes.Finish:
-                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_finish), x, y, _direction);
+                  DrawDefaults(graphics, ImagesGenerator.GetImageOutOfFolder(_finish), x, y, _direction);
                   if (sd.Left != null)
                   {
                      IParticipant participant = sd.Left;
@@ -125,7 +125,7 @@ namespace WpfRaceSim
                   }
                   break;
                case SectionTypes.LeftCorner:
-                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_cornerLeft), x, y, _direction);
+                  DrawDefaults(graphics, ImagesGenerator.GetImageOutOfFolder(_cornerLeft), x, y, _direction);
                   CalculateDirection(SectionTypes.LeftCorner);
                   if (sd.Left != null)
                   {
@@ -139,7 +139,7 @@ namespace WpfRaceSim
                   }
                   break;
                case SectionTypes.RightCorner:
-                  DrawDefaults(graphics, Images.GetImageOutOfFolder(_cornerRight), x, y, _direction);
+                  DrawDefaults(graphics, ImagesGenerator.GetImageOutOfFolder(_cornerRight), x, y, _direction);
                   CalculateDirection(SectionTypes.RightCorner);
                   if (sd.Left != null)
                   {
@@ -180,11 +180,11 @@ namespace WpfRaceSim
       {
          if (p == sd.Left)
          {
-            DrawDefaults(g, Images.GetImageOutOfFolder(GetDriverImage(p)), XCorrection(x, direction, "left"), YCorrection(y, direction, "left"), direction);
+            DrawDefaults(g, ImagesGenerator.GetImageOutOfFolder(GetDriverImage(p)), XCorrection(x, direction, "left"), YCorrection(y, direction, "left"), direction);
          }
          if(p == sd.Right)
          {
-            DrawDefaults(g, Images.GetImageOutOfFolder(GetDriverImage(p)), XCorrection(x, direction, "right"), YCorrection(y, direction, "right"), direction);
+            DrawDefaults(g, ImagesGenerator.GetImageOutOfFolder(GetDriverImage(p)), XCorrection(x, direction, "right"), YCorrection(y, direction, "right"), direction);
          }
       }
 

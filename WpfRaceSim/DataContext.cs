@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
+using System.Windows;
 
 namespace WpfRaceSim
 {
@@ -33,6 +34,7 @@ namespace WpfRaceSim
          Data.CurrentRace.DriversChanged += DriversChangedEventMethod;
          Data.CurrentRace.RaceChanged += RaceChangedEventMethod;
       }
+
       public void DriversChangedEventMethod(object? s, DriversChangedEventArgs e)
       {
          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
@@ -43,19 +45,6 @@ namespace WpfRaceSim
       {
          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
          CollectionChanged?.Invoke(this,new(NotifyCollectionChangedAction.Reset));
-      }
-
-      public string DriversFinishedConverter()
-      {
-         int driversFinishedNow = 0;
-         foreach(var participant in Data.CurrentRace.Participants)
-         {
-            if(participant.IsFinished == true)
-            {
-               driversFinishedNow++;
-            }
-         }
-         return driversFinishedNow.ToString();
       }
    }
 }

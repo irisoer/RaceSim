@@ -253,6 +253,7 @@ namespace Controller
             PointsToGive = PointsToGive / 2;
          }
          Thread.Sleep(500);
+         DriversChanged?.Invoke(this, new DriversChangedEventArgs(this.Track));
          Data.NextRace();
          RaceChanged?.Invoke(this, Data.CurrentRace); 
       }

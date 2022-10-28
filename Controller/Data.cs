@@ -17,15 +17,16 @@ namespace Controller
       #region Properties
       public static Competition Competition { get; set; }
       public static Race CurrentRace { get; set; }
+      public static bool RacesOver{ get; set; }
       #endregion
 
       #region Methods
       public static void Initialize()
       {
          Competition = new Competition();
+         RacesOver = false;
          AddParticipants();
          AddTracks();
-         AddParticipantsToCompetitionStats();
          if (Competition.Tracks.Count < 2) //check if there are at least 2 tracks in competition
          {
             throw new ArgumentException("There must be at least 2 tracks in a competition");
@@ -38,7 +39,7 @@ namespace Controller
          Competition.Participants.Add(new Driver("Lola", TeamColors.Blue));
          Competition.Participants.Add(new Driver("Abel", TeamColors.Red));
          Competition.Participants.Add(new Driver("Marco", TeamColors.Yellow));
-         Competition.Participants.Add(new Driver("Perry", TeamColors.Purple));
+         Competition.Participants.Add(new Driver("Perry", TeamColors.White));
       }
 
       public static void AddTracks()
@@ -145,21 +146,11 @@ namespace Controller
          }
          else
          {
-            CurrentRace = null;
+            RacesOver = true; 
             CalculateWinner();
             Console.WriteLine("No more races");
          }
       }
-
-
-      public static void AddParticipantsToCompetitionStats()
-      {
-         foreach (var participant in Competition.Participants)
-         {
-            Competition.CompetitionStats.Add(participant, 0);
-         }
-      }
-
 
       public static string PeekInTrackQueue()
       {
